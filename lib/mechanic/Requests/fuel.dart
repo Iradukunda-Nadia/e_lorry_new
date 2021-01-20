@@ -1473,6 +1473,7 @@ class _postFuelEvidenceState extends State<postFuelEvidence> {
                                   filled: true,
                                   fillColor: Colors.white.withOpacity(0.1),
                                   labelText: 'Total Litres In tank Post Refill as per myriad',
+                                  suffixText: 'LITRES',
                                   labelStyle: TextStyle(
                                       fontSize: 11
                                   )
