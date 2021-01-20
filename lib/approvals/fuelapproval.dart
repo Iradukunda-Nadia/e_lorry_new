@@ -35,6 +35,8 @@ class _FuelApprovalState extends State<FuelApproval> {
 
   }
 
+  String Pin;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -256,6 +258,9 @@ class _AppFuelState extends State<AppFuel> {
   String _comment;
   String appQuote;
   String appPrice;
+  String Pin;
+  var pinCode = TextEditingController();
+
 
   getStringValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -719,39 +724,69 @@ class _AppFuelState extends State<AppFuel> {
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: MaterialButton(
                             onPressed: (){
-                              if (widget.payMethod == 'Till') {
-                                _hoverUssd.sendUssd(
-                                  actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total}, );
-                              }
-                              if (widget.payMethod == 'Paybill') {
-                                _hoverUssd.sendUssd(
-                                  actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total}, );
-                              }
-                              if (widget.payMethod == 'Phone') {
-                                _hoverUssd.sendUssd(
-                                  actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total}, );
-                              }
+                              showCupertinoDialog(
+                              context: context,
+                              builder: (BuildContext context)=> CupertinoActionSheet(
+                              title: Text( "Please Enter your pin To Confirm payment"),
+                              message: Column(
+                                children: [
+                                CupertinoTextField(
+                                controller: pinCode,
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: true,
+                                ),
+                                ],
+
+                                ),
+                                actions: <Widget>[
+                                CupertinoButton(
+                                child: Text("Proceed"),
+                                onPressed: () {
+                                setState(() {
+                                Pin = pinCode.text;
+                                });
+                                if (widget.payMethod == 'Till') {
+                                  _hoverUssd.sendUssd(
+                                    actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total, 'pin': Pin}, );
+                                }
+                                if (widget.payMethod == 'Paybill') {
+                                  _hoverUssd.sendUssd(
+                                    actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total, 'pin': Pin}, );
+                                }
+                                if (widget.payMethod == 'Phone') {
+                                  _hoverUssd.sendUssd(
+                                    actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total, 'pin': Pin},  );
+                                }
+
+                                },
+                                )
+                                ],
+
+                              )
+                              );
+
+
                               _approveCommand();
                             },
                             child: Text('Approve And pay?',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'SFUIDisplay',
-                                fontWeight: FontWeight.bold,
-                              ),
+                            style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'SFUIDisplay',
+                            fontWeight: FontWeight.bold,
+                            ),
                             ),
                             color: Colors.white,
                             elevation: 16.0,
                             height: 50,
                             textColor: Colors.red,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)
+                            borderRadius: BorderRadius.circular(20)
                             ),
-                          ),
-                        ),
-                        new SizedBox(
-                          height: 5.0,
-                        ),
+                            ),
+                            ),
+                            new SizedBox(
+                            height: 5.0,
+                            ),
 
                       ],
                     ),

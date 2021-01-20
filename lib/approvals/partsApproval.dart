@@ -348,6 +348,9 @@ class _ApprovalState extends State<Approval> {
     });
   }
 
+  String Pin;
+  var pinCode = TextEditingController();
+
   void _show() {
     showDialog(
       context: context,
@@ -1147,6 +1150,7 @@ class _ApprovalState extends State<Approval> {
                                                     new FlatButton(
                                                       child: new Text("Approve"),
                                                       onPressed: () {
+
                                                         _approveCommand();
                                                         Navigator.of(context).pop();
                                                         Navigator.of(context).pop();
@@ -1383,18 +1387,46 @@ class _ApprovalState extends State<Approval> {
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                               child: MaterialButton(
                                 onPressed: (){
-                                  if (widget.payMethod == 'Till') {
-                                    _hoverUssd.sendUssd(
-                                      actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.amount}, );
-                                  }
-                                  if (widget.payMethod == 'Paybill') {
-                                    _hoverUssd.sendUssd(
-                                      actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.amount}, );
-                                  }
-                                  if (widget.payMethod == 'Phone') {
-                                    _hoverUssd.sendUssd(
-                                      actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.amount}, );
-                                  }
+                                  showCupertinoDialog(
+                                      context: context,
+                                      builder: (BuildContext context)=> CupertinoActionSheet(
+                                        title: Text( "Please Enter your pin To Confirm payment"),
+                                        message: Column(
+                                          children: [
+                                            CupertinoTextField(
+                                              controller: pinCode,
+                                              keyboardType: TextInputType.visiblePassword,
+                                              obscureText: true,
+                                            ),
+                                          ],
+
+                                        ),
+                                        actions: <Widget>[
+                                          CupertinoButton(
+                                            child: Text("Proceed"),
+                                            onPressed: () {
+                                              setState(() {
+                                                Pin = pinCode.text;
+                                              });
+                                              if (widget.payMethod == 'Till') {
+                                                _hoverUssd.sendUssd(
+                                                  actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.amount, 'pin': Pin}, );
+                                              }
+                                              if (widget.payMethod == 'Paybill') {
+                                                _hoverUssd.sendUssd(
+                                                  actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.amount, 'pin': Pin}, );
+                                              }
+                                              if (widget.payMethod == 'Phone') {
+                                                _hoverUssd.sendUssd(
+                                                  actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.amount, 'pin': Pin},  );
+                                              }
+
+                                            },
+                                          )
+                                        ],
+
+                                      )
+                                  );
                                   _approveandPay();
                                 },
                                 child: Text('Approve And pay?',
