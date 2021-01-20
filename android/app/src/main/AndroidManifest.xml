@@ -37,12 +37,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="com.hover.ApiKey"
-            android:value = "5258c8b4991d79b589eb2a304f06b0ea"/>
+
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.hover.ApiKey"
+            android:value = "5258c8b4991d79b589eb2a304f06b0ea"/>
 
     </application>
 </manifest>

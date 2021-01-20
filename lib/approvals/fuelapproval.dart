@@ -723,47 +723,19 @@ class _AppFuelState extends State<AppFuel> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                           child: MaterialButton(
-                            onPressed: (){
-                              showCupertinoDialog(
-                              context: context,
-                              builder: (BuildContext context)=> CupertinoActionSheet(
-                              title: Text( "Please Enter your pin To Confirm payment"),
-                              message: Column(
-                                children: [
-                                CupertinoTextField(
-                                controller: pinCode,
-                                keyboardType: TextInputType.visiblePassword,
-                                obscureText: true,
-                                ),
-                                ],
-
-                                ),
-                                actions: <Widget>[
-                                CupertinoButton(
-                                child: Text("Proceed"),
-                                onPressed: () {
-                                setState(() {
-                                Pin = pinCode.text;
-                                });
-                                if (widget.payMethod == 'Till') {
-                                  _hoverUssd.sendUssd(
-                                    actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total, 'pin': Pin}, );
-                                }
-                                if (widget.payMethod == 'Paybill') {
-                                  _hoverUssd.sendUssd(
-                                    actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total, 'pin': Pin}, );
-                                }
-                                if (widget.payMethod == 'Phone') {
-                                  _hoverUssd.sendUssd(
-                                    actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total, 'pin': Pin},  );
-                                }
-
-                                },
-                                )
-                                ],
-
-                              )
-                              );
+                            onPressed: () async {
+                              if (widget.payMethod == 'Till') {
+                                _hoverUssd.sendUssd(
+                                  actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total}, );
+                              }
+                              if (widget.payMethod == 'Paybill') {
+                                _hoverUssd.sendUssd(
+                                  actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total,}, );
+                              }
+                              if (widget.payMethod == 'Phone') {
+                                _hoverUssd.sendUssd(
+                                  actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total,},  );
+                              }
 
 
                               _approveCommand();
