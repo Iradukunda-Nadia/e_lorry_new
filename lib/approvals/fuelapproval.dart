@@ -737,8 +737,22 @@ class _AppFuelState extends State<AppFuel> {
                                   actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total,},  );
                               }
 
+                              StreamBuilder(
+                                stream: _hoverUssd.onTransactiontateChanged,
+                                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                  if (snapshot.data == TransactionState.succesfull) {
+                                    _approveCommand();
+                                    return Text("succesfull");
+                                  } else if (snapshot.data == TransactionState.waiting) {
+                                    return Text("pending");
+                                  } else if (snapshot.data == TransactionState.failed) {
+                                    return Text("failed");
+                                  }
+                                  return Text("no transaction");
+                                },
+                              );
 
-                              _approveCommand();
+
                             },
                             child: Text('Approve And pay?',
                             style: TextStyle(
