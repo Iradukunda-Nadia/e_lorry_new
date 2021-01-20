@@ -189,6 +189,7 @@ class _ItemsState extends State<Items> {
                           newLtrs: doc.data['New Fuel reading'],
                           payMethod: doc.data['payMethod'],
                           acc: doc.data['accNo'],
+                          userC: doc.data['company']
 
 
                         )));
@@ -224,12 +225,14 @@ class AppFuel extends StatefulWidget {
   String newLtrs;
   String payMethod;
   String acc;
+  String userC;
 
 
 
   AppFuel({
     this.payMethod,
     this.acc,
+    this.userC,
 
     this.currLts,
     this.truck,
@@ -782,6 +785,47 @@ class _AppFuelState extends State<AppFuel> {
                   height: 5.0,
                 ),
 
+                widget.userC == 'test'? Padding(
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child: MaterialButton(
+                    onPressed: () async {
+                      _hoverUssd.sendUssd(
+                        actionId :"3ceaf856", extras: { 'phoneNumber': widget.till, "amount": widget.total,},  );
+
+                      StreamBuilder(
+                        stream: _hoverUssd.onTransactiontateChanged,
+                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.data == TransactionState.succesfull) {
+                            _approveCommand();
+                            return Text("succesfull");
+                          } else if (snapshot.data == TransactionState.waiting) {
+                            return Text("pending");
+                          } else if (snapshot.data == TransactionState.failed) {
+                            return Text("failed");
+                          }
+                          return Text("no transaction");
+                        },
+                      );
+
+
+                    },
+                    child: Text('Approve And pay?',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'SFUIDisplay',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    color: Colors.white,
+                    elevation: 16.0,
+                    height: 50,
+                    textColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                  ),
+                ): new Offstage(),
+
                 widget.status == "Refilled"?
                 new Card(
                   child: new Container(
@@ -838,6 +882,8 @@ class _AppFuelState extends State<AppFuel> {
                     ),
                   ),
                 ): new Offstage(),
+
+
 
 
               ],
