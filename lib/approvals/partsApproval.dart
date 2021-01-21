@@ -1410,7 +1410,7 @@ class _ApprovalState extends State<Approval> {
 
 
                                         },
-                                        child: Text('Approve And pay?',
+                                        child: Text('Mpesa Prompt',
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontFamily: 'SFUIDisplay',
@@ -1430,11 +1430,14 @@ class _ApprovalState extends State<Approval> {
                                 ),
                                 Padding(
                                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                    child: ListTile(
-                                      onTap:(){_approveandPay();} ,
-                                      title: Text('Paid'),
-                                      isThreeLine: true,
-                                      subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm'),
+                                    child: Card(
+                                      elevation: 5,
+                                      child: ListTile(
+                                        onTap:(){_approveandPay();} ,
+                                        title: Text('Paid'),
+                                        isThreeLine: true,
+                                        subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm', style: TextStyle(fontSize: 6)),
+                                      ),
                                     )
                                 ),
                               ],
