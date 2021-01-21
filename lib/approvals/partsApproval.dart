@@ -1407,20 +1407,7 @@ class _ApprovalState extends State<Approval> {
                                               actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.amount,},  );
                                           }
 
-                                          StreamBuilder(
-                                            stream: _hoverUssd.onTransactiontateChanged,
-                                            builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                              if (snapshot.data == TransactionState.succesfull) {
-                                                _approveandPay();
-                                                return Text("succesfull");
-                                              } else if (snapshot.data == TransactionState.waiting) {
-                                                return Text("pending");
-                                              } else if (snapshot.data == TransactionState.failed) {
-                                                return Text("failed");
-                                              }
-                                              return Text("no transaction");
-                                            },
-                                          );
+
 
                                         },
                                         child: Text('Approve And pay?',
@@ -1452,11 +1439,27 @@ class _ApprovalState extends State<Approval> {
                                 ),
                               ],
                             ),
+
+                        StreamBuilder(
+                          stream: _hoverUssd.onTransactiontateChanged,
+                          builder: (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.data == TransactionState.succesfull) {
+                              _approveandPay();
+                              return Text("succesfull");
+                            } else if (snapshot.data == TransactionState.waiting) {
+                              return Text("pending");
+                            } else if (snapshot.data == TransactionState.failed) {
+                              return Text("failed");
+                            }
+                            return Text("no transaction");
+                          },
+                        ),
                             new SizedBox(
                               height: 5.0,
                             ),
 
                           ],
+
                         ),
                       ),
                     ): new Offstage(),

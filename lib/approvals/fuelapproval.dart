@@ -746,20 +746,7 @@ class _AppFuelState extends State<AppFuel> {
                                           actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total});
                                       }
 
-                                      StreamBuilder(
-                                        stream: _hoverUssd.onTransactiontateChanged,
-                                        builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                          if (snapshot.data == TransactionState.succesfull) {
-                                            _approveCommand();
-                                            return Text("succesfull");
-                                          } else if (snapshot.data == TransactionState.waiting) {
-                                            return Text("pending");
-                                          } else if (snapshot.data == TransactionState.failed) {
-                                            return Text("failed");
-                                          }
-                                          return Text("no transaction");
-                                        },
-                                      );
+
 
 
                                     },
@@ -797,6 +784,20 @@ class _AppFuelState extends State<AppFuel> {
 
                           ],
                         ),
+                    StreamBuilder(
+                      stream: _hoverUssd.onTransactiontateChanged,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.data == TransactionState.succesfull) {
+                          _approveCommand();
+                          return Text("succesfull");
+                        } else if (snapshot.data == TransactionState.waiting) {
+                          return Text("pending");
+                        } else if (snapshot.data == TransactionState.failed) {
+                          return Text("failed to connect to mpesa");
+                        }
+                        return Text("no transaction");
+                      },
+                    ),
                             new SizedBox(
                             height: 5.0,
                             ),
