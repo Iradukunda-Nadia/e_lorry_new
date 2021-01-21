@@ -719,182 +719,180 @@ String userComp ;
                   height: 10.0,
                 ),
                 widget.status == "pending"?
-                new Card(
-                  child: new Container(
-                    margin: new EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new SizedBox(
-                          height: 5.0,
-                        ),
+                Column(
+                  children: [
+                    new Card(
+                      child: new Container(
+                        margin: new EdgeInsets.only(left: 20.0, right: 20.0),
+                        child: new Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new SizedBox(
+                              height: 5.0,
+                            ),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                          child: MaterialButton(
+                                            onPressed: () async {
+                                              if (widget.payMethod == 'Till') {
+                                                _hoverUssd.sendUssd(
+                                                  actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total});
+                                              }
+                                              if (widget.payMethod == 'Paybill') {
+                                                _hoverUssd.sendUssd(
+                                                  actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total});
+                                              }
+                                              if (widget.payMethod == 'Phone') {
+                                                _hoverUssd.sendUssd(
+                                                  actionId :"8176f539", extras: { 'phoneNumber': widget.till, "amount": widget.total});
+                                              }
+
+
+
+
+                                            },
+                                            child: Text('Mpesa Prompt',
+                                            style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'SFUIDisplay',
+                                            fontWeight: FontWeight.bold,
+                                            ),
+                                            ),
+                                            color: Colors.white,
+                                            elevation: 16.0,
+                                            height: 50,
+                                            textColor: Colors.red,
+                                            shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20)
+                                            ),
+                                            ),
+                                            ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0), child: new Text('Use this option, \n To pay directly', textAlign: TextAlign.center, style: TextStyle(fontSize: 8, ),),
+                                        ),
+                                      ],
+                                    ),
+
+
+                                  ],
+                                ),
+
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
-                                  child: MaterialButton(
-                                    onPressed: () async {
-                                      if (widget.payMethod == 'Till') {
-                                        _hoverUssd.sendUssd(
-                                          actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total});
-                                      }
-                                      if (widget.payMethod == 'Paybill') {
-                                        _hoverUssd.sendUssd(
-                                          actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total});
-                                      }
-                                      if (widget.payMethod == 'Phone') {
-                                        _hoverUssd.sendUssd(
-                                          actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total});
-                                      }
+                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                  child: Column(
+                                    children: [
+                                      MaterialButton(
+                                        onPressed: (){
+                                          final AndroidIntent intent = AndroidIntent(
+                                              action: 'action_view',
+                                              package: "com.android.stk");
+                                          intent.launch();
+                                        },
+                                        child: Text('STK Menu',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'SFUIDisplay',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        color: Colors.white,
+                                        elevation: 16.0,
+                                        height: 50,
+                                        textColor: Colors.red,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20)
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0), child: new Text('Incase of an error, \n Write down the details and use this', textAlign: TextAlign.center, style: TextStyle(fontSize: 8, ),),
+                                      ),
+
+                                    ],
+                                  ),
 
 
-
-
-                                    },
-                                    child: Text('Mpesa Prompt',
-                                    style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'SFUIDisplay',
-                                    fontWeight: FontWeight.bold,
-                                    ),
-                                    ),
-                                    color: Colors.white,
-                                    elevation: 16.0,
-                                    height: 50,
-                                    textColor: Colors.red,
-                                    shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)
-                                    ),
-                                    ),
-                                    ),
+                                ),
 
 
                               ],
                             ),
-
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                              child: Column(
-                                children: [
-                                  MaterialButton(
-                                    onPressed: (){
-                                      final AndroidIntent intent = AndroidIntent(
-                                          action: 'action_view',
-                                          package: "com.android.stk");
-                                      intent.launch();
-                                    },
-                                    child: Text('STK Menu',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontFamily: 'SFUIDisplay',
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                    elevation: 16.0,
-                                    height: 50,
-                                    textColor: Colors.red,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0), child: new Text('Incase of an error, \n Write down the details and use this', textAlign: TextAlign.center, style: TextStyle(fontSize: 8, ),),
-                                  ),
-
-                                ],
-                              ),
-
-
-                            ),
-
+                                new SizedBox(
+                                height: 5.0,
+                                ),
 
                           ],
                         ),
-                    StreamBuilder(
-                      stream: _hoverUssd.onTransactiontateChanged,
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.data == TransactionState.succesfull) {
-                          return Text("success");
-                        } else if (snapshot.data == TransactionState.waiting) {
-                          return Text("processing");
-                        } else if (snapshot.data == TransactionState.failed) {
-                          return Text("failed");
-                        }
-                        return Text("no transaction");
-                      },
+                      ),
                     ),
-                            new SizedBox(
-                            height: 5.0,
-                            ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          child: MaterialButton(
-                            onPressed: () async {
-                              showCupertinoDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      CupertinoActionSheet(
-                                        title: Text(
-                                            "Enter your M-Pesa confirmation message"),
-                                        message: Column(
-                                          children: <Widget>[
-                                            CupertinoTextField(
-                                              controller: msg,
-                                              placeholder: 'Paste here',
-                                              keyboardType: TextInputType.multiline,
-                                              maxLines: null,
-                                            ),
-                                          ],
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      child: MaterialButton(
+                        onPressed: () async {
+                          showCupertinoDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  CupertinoActionSheet(
+                                    title: Text(
+                                        "Enter your M-Pesa confirmation message"),
+                                    message: Column(
+                                      children: <Widget>[
+                                        TextField(
+                                          controller: msg,
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: null,
                                         ),
-                                        actions: <Widget>[
-                                          CupertinoButton(
-                                            child: Text("Send"),
-                                            onPressed: () {
-                                              Firestore.instance.collection('messages')
-                                                  .add({
-                                                'text': msg.text,
-                                                'imageUrl': '',
-                                                'senderName': currentUserEmail ,
-                                                'senderPhotoUrl': '',
-                                                'time': DateTime.now(),
-                                                'company': userComp,
+                                      ],
+                                    ),
+                                    actions: <Widget>[
+                                      CupertinoButton(
+                                        child: Text("Send"),
+                                        onPressed: () {
+                                          Firestore.instance.collection('messages')
+                                              .add({
+                                            'text': msg.text,
+                                            'imageUrl': '',
+                                            'senderName': currentUserEmail ,
+                                            'senderPhotoUrl': '',
+                                            'time': DateTime.now(),
+                                            'company': userComp,
 
-                                              });
-                                              _approveCommand();
-                                            },
-                                          )
-                                        ],
-                                      ));
+                                          });
+                                          _approveCommand();
+                                        },
+                                      )
+                                    ],
+                                  ));
 
 
-                            },
+                        },
 
-                            child: Text('Paste Payment confirmation',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'SFUIDisplay',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            color: Colors.white,
-                            elevation: 16.0,
-                            height: 50,
-                            textColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)
-                            ),
+                        child: Text('Paste Payment confirmation',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'SFUIDisplay',
+                            fontWeight: FontWeight.bold,
                           ),
-                        )
+                        ),
+                        color: Colors.white,
+                        elevation: 16.0,
+                        height: 50,
+                        textColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)
+                        ),
+                      ),
+                    )
 
-                      ],
-                    ),
-                  ),
+                  ],
                 ): new Offstage(),
 
                 new SizedBox(
@@ -906,7 +904,18 @@ String userComp ;
                   child: MaterialButton(
                     onPressed: () async {
 
-                      _approveCommand();
+                      if (widget.payMethod == 'Till') {
+                        _hoverUssd.sendUssd(
+                            actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total});
+                      }
+                      if (widget.payMethod == 'Paybill') {
+                        _hoverUssd.sendUssd(
+                            actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total});
+                      }
+                      if (widget.payMethod == 'Phone') {
+                        _hoverUssd.sendUssd(
+                            actionId :"3ceaf856", extras: { 'phoneNumber': widget.till, "amount": widget.total});
+                      }
 
                     },
 
