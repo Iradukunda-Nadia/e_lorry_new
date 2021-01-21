@@ -371,7 +371,7 @@ class _fuelFormState extends State<fuelForm> {
                     padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                     child: Container(
                       child: TextFormField(
-                        keyboardType: TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: TextInputType.numberWithOptions(decimal: false),
                         textCapitalization: TextCapitalization.sentences,
                         style: TextStyle(
                             color: Colors.black,
@@ -408,7 +408,7 @@ class _fuelFormState extends State<fuelForm> {
                     padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                     child: Container(
                       child: TextFormField(
-                        keyboardType: TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: TextInputType.numberWithOptions(decimal: false),
                         textCapitalization: TextCapitalization.sentences,
                         style: TextStyle(
                             color: Colors.black,
@@ -441,7 +441,7 @@ class _fuelFormState extends State<fuelForm> {
                     padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                     child: ListTile(
                       title: Text('Total (KSH)', style: TextStyle(fontSize: 11),),
-                      subtitle:  Text(lR == '' || ppl == '' ? '...':(double.parse(lR)*double.parse(ppl)).toString()),
+                      subtitle:  Text(lR == '' || ppl == '' ? '...':(int.parse(lR)*int.parse(ppl)).toString()),
                     ),
                   ),
                   Divider(),

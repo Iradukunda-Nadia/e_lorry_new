@@ -792,23 +792,10 @@ class _AppFuelState extends State<AppFuel> {
                       _hoverUssd.sendUssd(
                         actionId :"3ceaf856", extras: { 'phoneNumber': widget.till, "amount": widget.total,},  );
 
-                      StreamBuilder(
-                        stream: _hoverUssd.onTransactiontateChanged,
-                        builder: (BuildContext context, AsyncSnapshot snapshot) {
-                          if (snapshot.data == TransactionState.succesfull) {
-                            _approveCommand();
-                            return Text("succesfull");
-                          } else if (snapshot.data == TransactionState.waiting) {
-                            return Text("pending");
-                          } else if (snapshot.data == TransactionState.failed) {
-                            return Text("failed");
-                          }
-                          return Text("no transaction");
-                        },
-                      );
 
 
                     },
+
                     child: Text('Approve And pay?',
                       style: TextStyle(
                         fontSize: 12,
@@ -825,7 +812,20 @@ class _AppFuelState extends State<AppFuel> {
                     ),
                   ),
                 ): new Offstage(),
-
+              StreamBuilder(
+                stream: _hoverUssd.onTransactiontateChanged,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == TransactionState.succesfull) {
+                    _approveCommand();
+                    return Text("successfull");
+                  } else if (snapshot.data == TransactionState.waiting) {
+                    return Text("pending");
+                  } else if (snapshot.data == TransactionState.failed) {
+                    return Text("failed");
+                  }
+                  return Text("no transaction");
+                },
+              ),
                 widget.status == "Refilled"?
                 new Card(
                   child: new Container(
