@@ -723,56 +723,79 @@ class _AppFuelState extends State<AppFuel> {
                           height: 5.0,
                         ),
 
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          child: MaterialButton(
-                            onPressed: () async {
-                              if (widget.payMethod == 'Till') {
-                                _hoverUssd.sendUssd(
-                                  actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total}, );
-                              }
-                              if (widget.payMethod == 'Paybill') {
-                                _hoverUssd.sendUssd(
-                                  actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total,}, );
-                              }
-                              if (widget.payMethod == 'Phone') {
-                                _hoverUssd.sendUssd(
-                                  actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total,},  );
-                              }
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                  child: MaterialButton(
+                                    onPressed: () async {
+                                      if (widget.payMethod == 'Till') {
+                                        _hoverUssd.sendUssd(
+                                          actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.total});
+                                      }
+                                      if (widget.payMethod == 'Paybill') {
+                                        _hoverUssd.sendUssd(
+                                          actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.total});
+                                      }
+                                      if (widget.payMethod == 'Phone') {
+                                        _hoverUssd.sendUssd(
+                                          actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.total});
+                                      }
 
-                              StreamBuilder(
-                                stream: _hoverUssd.onTransactiontateChanged,
-                                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                  if (snapshot.data == TransactionState.succesfull) {
-                                    _approveCommand();
-                                    return Text("succesfull");
-                                  } else if (snapshot.data == TransactionState.waiting) {
-                                    return Text("pending");
-                                  } else if (snapshot.data == TransactionState.failed) {
-                                    return Text("failed");
-                                  }
-                                  return Text("no transaction");
-                                },
-                              );
+                                      StreamBuilder(
+                                        stream: _hoverUssd.onTransactiontateChanged,
+                                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                          if (snapshot.data == TransactionState.succesfull) {
+                                            _approveCommand();
+                                            return Text("succesfull");
+                                          } else if (snapshot.data == TransactionState.waiting) {
+                                            return Text("pending");
+                                          } else if (snapshot.data == TransactionState.failed) {
+                                            return Text("failed");
+                                          }
+                                          return Text("no transaction");
+                                        },
+                                      );
 
 
-                            },
-                            child: Text('Approve And pay?',
-                            style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: 'SFUIDisplay',
-                            fontWeight: FontWeight.bold,
+                                    },
+                                    child: Text('Pay with Mpesa Prompt?',
+                                    style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'SFUIDisplay',
+                                    fontWeight: FontWeight.bold,
+                                    ),
+                                    ),
+                                    color: Colors.white,
+                                    elevation: 16.0,
+                                    height: 50,
+                                    textColor: Colors.red,
+                                    shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)
+                                    ),
+                                    ),
+                                    ),
+
+
+                              ],
                             ),
+
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              child: ListTile(
+                                title: Text('Paid'),
+                                isThreeLine: true,
+                                subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm'),
+                              )
                             ),
-                            color: Colors.white,
-                            elevation: 16.0,
-                            height: 50,
-                            textColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)
-                            ),
-                            ),
-                            ),
+
+
+                          ],
+                        ),
                             new SizedBox(
                             height: 5.0,
                             ),
@@ -790,9 +813,7 @@ class _AppFuelState extends State<AppFuel> {
                   child: MaterialButton(
                     onPressed: () async {
                       _hoverUssd.sendUssd(
-                        actionId :"3ceaf856", extras: { 'phoneNumber': widget.till, "amount": widget.total,},  );
-
-
+                        actionId :"3ceaf856", extras: { 'phoneNumber': widget.till, "amount": widget.total});
 
                     },
 
@@ -822,6 +843,8 @@ class _AppFuelState extends State<AppFuel> {
                     return Text("pending");
                   } else if (snapshot.data == TransactionState.failed) {
                     return Text("failed");
+
+
                   }
                   return Text("no transaction");
                 },
