@@ -773,17 +773,31 @@ class _AppFuelState extends State<AppFuel> {
 
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                              child: GestureDetector(
-                                onTap:(){_approveCommand();} ,
-                                child: Card(
-                                  elevation: 10,
-                                  child: ListTile(
-                                    title: Text('Paid'),
-                                    isThreeLine: true,
-                                    subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm', style: TextStyle(fontSize: 6)),
+                              child: Column(
+                                children: [
+                                  new Text('incase of error \n Pay from Mpesa and click', style: TextStyle(fontSize: 8 ),),
+                                  MaterialButton(
+                                    onPressed: (){_approveCommand();},
+                                    child: Text('Paid',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: 'SFUIDisplay',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                    elevation: 16.0,
+                                    height: 50,
+                                    textColor: Colors.red,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
                                   ),
-                                ),
-                              )
+
+                                ],
+                              ),
+
+
                             ),
 
 
