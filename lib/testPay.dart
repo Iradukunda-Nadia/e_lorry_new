@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hover_ussd/hover_ussd.dart';
 import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
+import 'package:android_intent/android_intent.dart';
 
 class testPay extends StatefulWidget {
   @override
@@ -23,8 +24,10 @@ class _testPayState extends State<testPay> {
             children: [
               FlatButton(
                 onPressed: () {
-                  _hoverUssd.sendUssd(
-                      actionId :"cfb31b12", extras: {});
+                  final AndroidIntent intent = AndroidIntent(
+                      action: 'action_view',
+                      package: "com.android.stk");
+                  intent.launch();
                 },
                 child: Text("Start Transaction"),
               ),

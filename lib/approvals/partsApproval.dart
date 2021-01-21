@@ -16,6 +16,7 @@ import 'package:photo_view/photo_view.dart';
 import '../chat.dart';
 
 import 'package:hover_ussd/hover_ussd.dart';
+import 'package:android_intent/android_intent.dart';
 
 final HoverUssd _hoverUssd = HoverUssd();
 
@@ -312,11 +313,13 @@ class _ApprovalState extends State<Approval> {
   String _comment;
   String appQuote;
   String appPrice;
+  String userCompany;
 
   getStringValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       currentUserEmail = prefs.getString('user');
+      userCompany = prefs.getString('company');
     });
 
   }
@@ -431,6 +434,8 @@ class _ApprovalState extends State<Approval> {
 
     }
   }
+
+  var msg = TextEditingController();
 
   _updateData() async {
     await Firestore.instance
@@ -891,7 +896,31 @@ class _ApprovalState extends State<Approval> {
                                       width: 5.0,
                                     ),
                                     new Text(
-                                      widget.payMethod,
+                                      'Payment Method',
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.payMethod,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "${widget.payMethod} no.",
                                       style: new TextStyle(color: Colors.black, fontSize: 18.0,),
                                     )
                                   ],
@@ -1432,10 +1461,14 @@ class _ApprovalState extends State<Approval> {
                                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                                     child: Column(
                                       children: [
-                                        new Text('incase of error \n Pay from Mpesa and click', style: TextStyle(fontSize: 8 ),),
                                         MaterialButton(
-                                          onPressed: (){_approveandPay();},
-                                          child: Text('Paid',
+                                          onPressed: (){
+                                            final AndroidIntent intent = AndroidIntent(
+                                              action: 'action_view',
+                                              package: "com.android.stk");
+                                          intent.launch();
+                                          },
+                                          child: Text('STK Menu',
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontFamily: 'SFUIDisplay',
@@ -1449,6 +1482,9 @@ class _ApprovalState extends State<Approval> {
                                           shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(20)
                                           ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0), child: new Text('Incase of an error, \n Write down the details and use this', textAlign: TextAlign.center, style: TextStyle(fontSize: 8, ),),
                                         ),
 
                                       ],
@@ -1476,10 +1512,70 @@ class _ApprovalState extends State<Approval> {
                             new SizedBox(
                               height: 5.0,
                             ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              child: MaterialButton(
+                                onPressed: () async {
+                                  showCupertinoDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          CupertinoActionSheet(
+                                            title: Text(
+                                                "Enter your M-Pesa confirmation message"),
+                                            message: Column(
+                                              children: <Widget>[
+                                                CupertinoTextField(
+                                                  controller: msg,
+                                                  placeholder: 'Paste here',
+                                                  keyboardType: TextInputType.multiline,
+                                                  maxLines: null,
+                                                ),
+                                              ],
+                                            ),
+                                            actions: <Widget>[
+                                              CupertinoButton(
+                                                child: Text("Send"),
+                                                onPressed: () {
+                                                  Firestore.instance.collection('messages')
+                                                      .add({
+                                                    'text': msg.text,
+                                                    'imageUrl': '',
+                                                    'senderName': currentUserEmail ,
+                                                    'senderPhotoUrl': '',
+                                                    'time': DateTime.now(),
+                                                    'company': userCompany,
+
+                                                  });
+                                                  _approveandPay();
+                                                },
+                                              )
+                                            ],
+                                          ));
+
+
+                                },
+
+                                child: Text('Paste Payment confirmation',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'SFUIDisplay',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                color: Colors.white,
+                                elevation: 16.0,
+                                height: 50,
+                                textColor: Colors.red,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)
+                                ),
+                              ),
+                            )
 
                           ],
 
                         ),
+
                       ),
                     ): new Offstage(),
                     new SizedBox(

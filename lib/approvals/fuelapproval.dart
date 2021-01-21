@@ -1,3 +1,4 @@
+import 'package:android_intent/android_intent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_lorry/mechanic/Requests/fuel.dart';
 import 'package:flutter/cupertino.dart';
@@ -263,12 +264,13 @@ class _AppFuelState extends State<AppFuel> {
   String appPrice;
   String Pin;
   var pinCode = TextEditingController();
-
+String userComp ;
 
   getStringValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       currentUserEmail = prefs.getString('user');
+      userComp = prefs.getString('company');
     });
 
   }
@@ -363,6 +365,10 @@ class _AppFuelState extends State<AppFuel> {
 
   }
   String radioItem = '';
+  bool isApproval = false;
+  bool showApproval = false;
+
+  var msg = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -775,10 +781,14 @@ class _AppFuelState extends State<AppFuel> {
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                               child: Column(
                                 children: [
-                                  new Text('incase of error \n Pay from Mpesa and click', style: TextStyle(fontSize: 8 ),),
                                   MaterialButton(
-                                    onPressed: (){_approveCommand();},
-                                    child: Text('Paid',
+                                    onPressed: (){
+                                      final AndroidIntent intent = AndroidIntent(
+                                          action: 'action_view',
+                                          package: "com.android.stk");
+                                      intent.launch();
+                                    },
+                                    child: Text('STK Menu',
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontFamily: 'SFUIDisplay',
@@ -792,6 +802,9 @@ class _AppFuelState extends State<AppFuel> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(20)
                                     ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0), child: new Text('Incase of an error, \n Write down the details and use this', textAlign: TextAlign.center, style: TextStyle(fontSize: 8, ),),
                                   ),
 
                                 ],
@@ -807,12 +820,11 @@ class _AppFuelState extends State<AppFuel> {
                       stream: _hoverUssd.onTransactiontateChanged,
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.data == TransactionState.succesfull) {
-                          _approveCommand();
-                          return Text("succesfull");
+                          return Text("success");
                         } else if (snapshot.data == TransactionState.waiting) {
-                          return Text("pending");
+                          return Text("processing");
                         } else if (snapshot.data == TransactionState.failed) {
-                          return Text("failed to connect to mpesa");
+                          return Text("failed");
                         }
                         return Text("no transaction");
                       },
@@ -820,11 +832,71 @@ class _AppFuelState extends State<AppFuel> {
                             new SizedBox(
                             height: 5.0,
                             ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          child: MaterialButton(
+                            onPressed: () async {
+                              showCupertinoDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      CupertinoActionSheet(
+                                        title: Text(
+                                            "Enter your M-Pesa confirmation message"),
+                                        message: Column(
+                                          children: <Widget>[
+                                            CupertinoTextField(
+                                              controller: msg,
+                                              placeholder: 'Paste here',
+                                              keyboardType: TextInputType.multiline,
+                                              maxLines: null,
+                                            ),
+                                          ],
+                                        ),
+                                        actions: <Widget>[
+                                          CupertinoButton(
+                                            child: Text("Send"),
+                                            onPressed: () {
+                                              Firestore.instance.collection('messages')
+                                                  .add({
+                                                'text': msg.text,
+                                                'imageUrl': '',
+                                                'senderName': currentUserEmail ,
+                                                'senderPhotoUrl': '',
+                                                'time': DateTime.now(),
+                                                'company': userComp,
+
+                                              });
+                                              _approveCommand();
+                                            },
+                                          )
+                                        ],
+                                      ));
+
+
+                            },
+
+                            child: Text('Paste Payment confirmation',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: 'SFUIDisplay',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            color: Colors.white,
+                            elevation: 16.0,
+                            height: 50,
+                            textColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                          ),
+                        )
 
                       ],
                     ),
                   ),
                 ): new Offstage(),
+
                 new SizedBox(
                   height: 5.0,
                 ),
@@ -833,8 +905,8 @@ class _AppFuelState extends State<AppFuel> {
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: MaterialButton(
                     onPressed: () async {
-                      _hoverUssd.sendUssd(
-                        actionId :"3ceaf856", extras: { 'phoneNumber': widget.till, "amount": widget.total});
+
+                      _approveCommand();
 
                     },
 
@@ -858,10 +930,9 @@ class _AppFuelState extends State<AppFuel> {
                 stream: _hoverUssd.onTransactiontateChanged,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.data == TransactionState.succesfull) {
-                    _approveCommand();
-                    return Text("successfull");
+                    return Text("success");
                   } else if (snapshot.data == TransactionState.waiting) {
-                    return Text("pending");
+                    return Text("processing");
                   } else if (snapshot.data == TransactionState.failed) {
                     return Text("failed");
 
@@ -870,6 +941,12 @@ class _AppFuelState extends State<AppFuel> {
                   return Text("no transaction");
                 },
               ),
+                new SizedBox(
+                  height: 5.0,
+                ),
+
+
+
                 widget.status == "Refilled"?
                 new Card(
                   child: new Container(
