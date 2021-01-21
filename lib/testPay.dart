@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hover_ussd/hover_ussd.dart';
+import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
 
 class testPay extends StatefulWidget {
   @override
@@ -8,14 +9,7 @@ class testPay extends StatefulWidget {
 }
 
 class _testPayState extends State<testPay> {
-
   final HoverUssd _hoverUssd = HoverUssd();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    HoverUssd().initialize();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +23,8 @@ class _testPayState extends State<testPay> {
             children: [
               FlatButton(
                 onPressed: () {
-
                   _hoverUssd.sendUssd(
-                    actionId :"1c3b37eb", extras: { 'phoneNumber': '0757615288', "amount": "10"}, );
+                      actionId :"cfb31b12", extras: {});
                 },
                 child: Text("Start Transaction"),
               ),

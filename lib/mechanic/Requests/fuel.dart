@@ -246,7 +246,7 @@ class _fuelFormState extends State<fuelForm> {
         "Current litres": _currLtrs,
         "Requested fuel": lR,
         "Price per liter": ppl,
-        "Total": (double.parse(lR)*double.parse(ppl)).toString(),
+        "Total": (int.parse(lR)*int.parse(ppl)).toString(),
         "FuelStaion": isLalji != true?_fuelStation: 'Lalji-Nairobi',
         "Till": isLalji != true?_till: 'N/A',
         'Receipent': isPhone == true? _recepient: 'N/A',

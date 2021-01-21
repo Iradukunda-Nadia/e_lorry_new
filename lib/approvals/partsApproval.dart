@@ -1396,15 +1396,15 @@ class _ApprovalState extends State<Approval> {
                                         onPressed: (){
                                           if (widget.payMethod == 'Till') {
                                             _hoverUssd.sendUssd(
-                                              actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": widget.amount});
+                                              actionId :"0466d73d", extras: { 'tillNo': widget.till, "amount": ((int.parse(widget.amount)).round()).toString()});
                                           }
                                           if (widget.payMethod == 'Paybill') {
                                             _hoverUssd.sendUssd(
-                                              actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": widget.amount});
+                                              actionId :"ec8d62b1", extras: { 'businessNo': widget.till, "AcNumber": widget.acc, "amount": ((int.parse(widget.amount)).round()).toString()});
                                           }
                                           if (widget.payMethod == 'Phone') {
                                             _hoverUssd.sendUssd(
-                                              actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": widget.amount,},  );
+                                              actionId :"1c3b37eb", extras: { 'phoneNumber': widget.till, "amount": ((int.parse(widget.amount)).round()).toString()},  );
                                           }
 
 
