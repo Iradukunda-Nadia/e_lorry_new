@@ -730,7 +730,7 @@ class _AppFuelState extends State<AppFuel> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                  padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
                                   child: MaterialButton(
                                     onPressed: () async {
                                       if (widget.payMethod == 'Till') {
@@ -773,13 +773,15 @@ class _AppFuelState extends State<AppFuel> {
 
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                              child: Card(
-                                elevation: 5,
-                                child: ListTile(
-                                  onTap:(){_approveCommand();} ,
-                                  title: Text('Paid'),
-                                  isThreeLine: true,
-                                  subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm', style: TextStyle(fontSize: 6)),
+                              child: GestureDetector(
+                                onTap:(){_approveCommand();} ,
+                                child: Card(
+                                  elevation: 10,
+                                  child: ListTile(
+                                    title: Text('Paid'),
+                                    isThreeLine: true,
+                                    subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm', style: TextStyle(fontSize: 6)),
+                                  ),
                                 ),
                               )
                             ),

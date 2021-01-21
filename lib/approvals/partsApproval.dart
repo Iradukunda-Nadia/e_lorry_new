@@ -1391,7 +1391,7 @@ class _ApprovalState extends State<Approval> {
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                      padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
                                       child: MaterialButton(
                                         onPressed: (){
                                           if (widget.payMethod == 'Till') {
@@ -1430,13 +1430,15 @@ class _ApprovalState extends State<Approval> {
                                 ),
                                 Padding(
                                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                    child: Card(
-                                      elevation: 5,
-                                      child: ListTile(
-                                        onTap:(){_approveandPay();} ,
-                                        title: Text('Paid'),
-                                        isThreeLine: true,
-                                        subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm', style: TextStyle(fontSize: 6)),
+                                    child: GestureDetector(
+                                      onTap:(){_approveandPay();} ,
+                                      child: Card(
+                                        elevation: 10,
+                                        child: ListTile(
+                                          title: Text('Paid'),
+                                          isThreeLine: true,
+                                          subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm', style: TextStyle(fontSize: 6)),
+                                        ),
                                       ),
                                     )
                                 ),
