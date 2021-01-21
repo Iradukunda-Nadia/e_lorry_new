@@ -787,6 +787,7 @@ class _AppFuelState extends State<AppFuel> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                               child: ListTile(
+                                onTap:(){_approveCommand();} ,
                                 title: Text('Paid'),
                                 isThreeLine: true,
                                 subtitle: Text('Incase of error with the prompt \n Pay from mpesa and confirm'),
