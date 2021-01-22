@@ -209,6 +209,7 @@ class _ItemsState extends State<Items> {
                           till: doc.data['Till'],
                           receivedBy: doc.data['Received by'],
                           img : doc.data['image'],
+                          token: doc.data['token']
 
 
                         )));
@@ -261,6 +262,7 @@ class Approval extends StatefulWidget {
   String payType;
   String payMethod;
   String till;
+  String token;
 
 
   Approval({
@@ -278,6 +280,7 @@ class Approval extends StatefulWidget {
     this.till,
     this.receivedBy,
     this.img,
+    this.token,
 
 
     this.brand3,
@@ -366,6 +369,7 @@ class _ApprovalState extends State<Approval> {
             new FlatButton(
               child: new Text("close"),
               onPressed: () {
+                Navigator.of(context).pop();
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
@@ -1547,11 +1551,12 @@ class _ApprovalState extends State<Approval> {
                                               Firestore.instance.collection('messages')
                                                   .add({
                                                 'text': msg.text,
-                                                'imageUrl': '',
+                                                'imageUrl': null,
                                                 'senderName': currentUserEmail ,
                                                 'senderPhotoUrl': '',
                                                 'time': DateTime.now(),
                                                 'company': userCompany,
+                                                'token': widget.token,
 
                                               });
                                               _approveandPay();

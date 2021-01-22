@@ -88,6 +88,7 @@ class _prevLpoState extends State<prevLpo> {
                           reqSupplier: doc.data['Supplier'],
                           appby: doc.data['Approved by'],
                           prepby: doc.data['prepared by'],
+                          truck: doc.data['truck'],
 
 
                         )));
@@ -123,9 +124,10 @@ class lpoDetail extends StatefulWidget {
   String reqPrice;
   String reqSupplier;
   String reqStatus;
+  String truck;
 
   lpoDetail({
-
+    this.truck,
     this.appby,
     this.prepby,
     this.reqStatus,
@@ -182,12 +184,21 @@ class _lpoDetailState extends State<lpoDetail> {
     );
   }
 
-String userCompany;
+  String userCompany;
+  String compPhone;
+  String compEmail;
+  String compLogo;
+  String compName;
+
   getStringValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       name = prefs.getString('user');
       userCompany = prefs.getString('company');
+      compPhone = prefs.getString('compPhone');
+      compEmail = prefs.getString('compEmail');
+      compLogo = prefs.getString('compLogo');
+      compName = prefs.getString('compName');
     });
 
   }
@@ -281,6 +292,9 @@ String userCompany;
   }
 
 
+
+
+
   initState() {
     getStringValue();
     super.initState();
@@ -367,16 +381,21 @@ String userCompany;
                               Column(
                                 children: <Widget>[
                                   new Text(
-                                    "Cell: +254-705-617118",
+                                    "Cell: $compPhone",
                                     style: new TextStyle(
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w700),
                                   ),
                                   new Text(
-                                    "Email: info@elogisticsltd.com",
+                                    "Email: $compEmail",
                                     style: new TextStyle(
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w700),
+                                  ),
+                                  new Text(
+                                    'Truck: ${widget.truck}',
+                                    style: new TextStyle(
+                                        fontSize: 18.0, fontWeight: FontWeight.w700),
                                   ),
                                 ],
                               ),

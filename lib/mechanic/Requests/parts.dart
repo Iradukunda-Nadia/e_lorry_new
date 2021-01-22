@@ -262,11 +262,16 @@ class _partRequestState extends State<partRequest> {
   String _account;
   String _amount;
 
+  final FirebaseMessaging _messaging = FirebaseMessaging();
+
   void _loginCommand() {
     final form = formKey.currentState;
 
+
     Firestore.instance.runTransaction((Transaction transaction) async {
       CollectionReference reference = Firestore.instance.collection('partRequest');
+
+      String fcmToken = await _messaging.getToken();
 
       await reference.add({
         "Truck": Item,
@@ -293,7 +298,9 @@ class _partRequestState extends State<partRequest> {
         'paymentType': payMethod,
         'Receipent': isPhone == true? _recepient: 'N/A',
         "Till": isLalji != true?_till: 'N/A',
-        'amount': isCash == true? _amount : "N/A"
+        'amount': isCash == true? _amount : "N/A",
+        'token': fcmToken,
+
 
       });
     }).then((result) =>

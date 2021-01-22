@@ -190,7 +190,8 @@ class _ItemsState extends State<Items> {
                           newLtrs: doc.data['New Fuel reading'],
                           payMethod: doc.data['payMethod'],
                           acc: doc.data['accNo'],
-                          userC: doc.data['company']
+                          userC: doc.data['company'],
+                          token: doc.data['token']
 
 
                         )));
@@ -227,6 +228,7 @@ class AppFuel extends StatefulWidget {
   String payMethod;
   String acc;
   String userC;
+  String token;
 
 
 
@@ -249,6 +251,7 @@ class AppFuel extends StatefulWidget {
     this.itemID,
     this.image,
     this.newLtrs,
+    this.token,
 
   });
   @override
@@ -346,6 +349,7 @@ String userComp ;
             new FlatButton(
               child: new Text("close"),
               onPressed: () {
+                Navigator.of(context).pop();
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
@@ -859,11 +863,12 @@ String userComp ;
                                           Firestore.instance.collection('messages')
                                               .add({
                                             'text': msg.text,
-                                            'imageUrl': '',
+                                            'imageUrl': null,
                                             'senderName': currentUserEmail ,
                                             'senderPhotoUrl': '',
                                             'time': DateTime.now(),
                                             'company': userComp,
+                                            'token': widget.token,
 
                                           });
                                           _approveCommand();

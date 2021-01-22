@@ -21,6 +21,27 @@ var transporter = nodemailer.createTransport({
     }
 });
 
+export const sendToDevice = functions.firestore
+  .document('messages/{Item}')
+  .onCreate(async snapshot => {
+
+
+    const approval: any = snapshot.data();
+
+    const tokens = approval.token;
+    const text = approval.text;
+
+    const payload: admin.messaging.MessagingPayload = {
+      notification: {
+        title: 'Request Paid!!',
+        body: text,
+
+      }
+    };
+
+    return fcm.sendToDevice(tokens, payload);
+  });
+
 
 
 export const sendToTopic = functions.firestore

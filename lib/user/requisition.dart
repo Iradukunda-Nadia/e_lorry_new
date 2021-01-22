@@ -784,6 +784,7 @@ class _RequisitionDetailState extends State<RequisitionDetail> {
                             reqSupplier: widget.approvedQuote,
                             appby: widget.approvedby,
                             docID: widget.ID,
+                            truck: widget.itemNumber,
 
 
 

@@ -38,9 +38,10 @@ class lpoForm extends StatefulWidget {
   String reqStatus;
   String docID;
   String appQuote;
+  String truck;
 
   lpoForm({
-
+    this.truck,
     this.appby,
     this.docID,
     this.reqStatus,
@@ -178,6 +179,7 @@ class _lpoFormState extends State<lpoForm> {
         "Approved by" : widget.appby,
         "Supplier" : widget.appQuote,
         "company" : userCompany,
+        'truck': widget.truck
 
       });
     });
@@ -321,7 +323,6 @@ class _lpoFormState extends State<lpoForm> {
                           new SizedBox(
                             height: 5.0,
                           ),
-
                           new Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -352,6 +353,11 @@ class _lpoFormState extends State<lpoForm> {
                                     style: new TextStyle(
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w700),
+                                  ),
+                                  new Text(
+                                    'Truck: ${widget.truck}',
+                                    style: new TextStyle(
+                                        fontSize: 18.0, fontWeight: FontWeight.w700),
                                   ),
                                 ],
                               ),
