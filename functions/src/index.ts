@@ -81,16 +81,17 @@ export const sendPostFuel = functions.firestore
   let comp = snapshot.get('company');
   let apTopic = `approvals${comp}`;
   let img = snapshot.get('image');
+  let vehicle = snapshot.get('Truck');
 
     const message: admin.messaging.MessagingPayload = {
       notification: {
-        title: 'TRUCK !',
-        body: `New request awaiting approval`,
+        title: vehicle,
+        body: `Refilled successfully`,
         image: img,
       }
     };
 
-    return fcm.sendToTopic(aTopic, message);
+    return fcm.sendToTopic(apTopic, message);
   });
 
 export const sendpartRequest = functions.firestore
