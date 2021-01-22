@@ -50,8 +50,10 @@ dependencies:
   photo_view: ^0.10.3
   mpesa: ^1.0.0
   mpesa_flutter_plugin: ^0.0.4
-  hover_ussd: ^0.0.2+1
   android_intent: ^0.3.7+7
+  hover_ussd:
+    git:
+      url: https://github.com/Iradukunda-Nadia/hover_ussd
 
 
 dev_dependencies:
