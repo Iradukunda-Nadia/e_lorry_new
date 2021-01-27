@@ -460,6 +460,33 @@ String userComp ;
                                   width: 5.0,
                                 ),
                                 new Text(
+                                  "Request By",
+                                  style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                )
+                              ],
+                            ),
+                            new Text(
+                              widget.reqBy,
+                              style: new TextStyle(
+                                  fontSize: 11.0,
+                                  color: Colors.indigo,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        new SizedBox(
+                          height: 5.0,
+                        ),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                new SizedBox(
+                                  width: 5.0,
+                                ),
+                                new Text(
                                   "Current Litres",
                                   style: new TextStyle(color: Colors.black, fontSize: 18.0,),
                                 )

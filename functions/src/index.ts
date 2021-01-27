@@ -25,11 +25,9 @@ export const sendToDevice = functions.firestore
   .document('messages/{Item}')
   .onCreate(async snapshot => {
 
+    let tokens = snapshot.get('token');
+    let text = snapshot.get('text');
 
-    const approval: any = snapshot.data();
-
-    const tokens = approval.token;
-    const text = approval.text;
 
     const payload: admin.messaging.MessagingPayload = {
       notification: {

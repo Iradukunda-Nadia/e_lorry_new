@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
+import 'package:e_lorry/manager/reporting/genReport.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -836,7 +837,7 @@ class _repDivState extends State<repDiv> {
               child: new InkWell(
                 onTap: () {
                   Navigator.of(context).push(new CupertinoPageRoute(
-                      builder: (BuildContext context) => new pTrip()
+                      builder: (BuildContext context) => new genPOST()
                   ));
                 },
                 child: new Container(
@@ -871,7 +872,7 @@ class _repDivState extends State<repDiv> {
               child: new InkWell(
                 onTap: () {
                   Navigator.of(context).push(new CupertinoPageRoute(
-                      builder: (BuildContext context) => new matReport()
+                      builder: (BuildContext context) => new genParts()
                   ));
                 },
                 child: new Container(
@@ -889,7 +890,40 @@ class _repDivState extends State<repDiv> {
                               new Radius.circular(20.0))),
                       child: new Center(
                           child: new Text(
-                            "Material request Report",
+                            "Part request Report",
+                            style: new TextStyle(
+                                color: const Color(0xff016836), fontSize: 20.0),
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+              const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40.0),
+              child: new InkWell(
+                onTap: () {
+                  Navigator.of(context).push(new CupertinoPageRoute(
+                      builder: (BuildContext context) => new genFuel()
+                  ));
+                },
+                child: new Container(
+                  height: 60.0,
+                  margin: new EdgeInsets.only(top: 5.0),
+                  child: new Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: new Container(
+                      margin: new EdgeInsets.only(
+                          left: 10.0, right: 10.0, bottom: 2.0),
+                      height: 60.0,
+                      decoration: new BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: new BorderRadius.all(
+                              new Radius.circular(20.0))),
+                      child: new Center(
+                          child: new Text(
+                            "Fuel request Report",
                             style: new TextStyle(
                                 color: const Color(0xff016836), fontSize: 20.0),
                           )),

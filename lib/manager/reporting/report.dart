@@ -44,7 +44,7 @@ reportView(context) async {
     servicelist = querySnapshot.documents;
   }
   List<List<String>> serve = new List();
-  serve.add(<String>['Truck', 'Item','Quantity','Supplier 1', 'Price', 'VAT?' , "Supplier 2", "Price", 'VAT?', "Supplier 3", "Price", 'VAT?', "reqDate", 'request by'],);
+  serve.add(<String>['Truck', 'Item','Quantity','Total Cash','Supplier 1', 'Price', 'VAT?' , "Supplier 2", "Price", 'VAT?', "Supplier 3", "Price", 'VAT?', "reqDate", 'request by'],);
 
     final QuerySnapshot result =
     await Firestore.instance.collection("partRequest").where('date', isEqualTo: DateFormat('yyyy-MM-dd').format(DateTime.now())).orderBy('timestamp', descending: true).getDocuments();
@@ -53,9 +53,11 @@ reportView(context) async {
 
     documents.forEach((snapshot) {
       List<String> recind = <String>[
+
         snapshot.data['Truck'],
         snapshot.data['Item'],
         snapshot.data['Quantity'],
+        snapshot.data['total'],
         snapshot.data['Supplier 1'],
         snapshot.data['quoteOne'],
         snapshot.data['1VAT'],

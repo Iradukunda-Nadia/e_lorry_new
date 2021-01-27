@@ -306,10 +306,12 @@ packages:
   hover_ussd:
     dependency: "direct main"
     description:
-      name: hover_ussd
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2+1"
+      path: "."
+      ref: HEAD
+      resolved-ref: "74294010616ffe3117ce3b6cf32d6618c55699b7"
+      url: "https://github.com/Iradukunda-Nadia/hover_ussd"
+    source: git
+    version: "0.0.2+2"
   http:
     dependency: transitive
     description:

@@ -20,10 +20,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HoverUssd().initialize();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  FirebaseInAppMessaging fiam = FirebaseInAppMessaging();
-  MpesaFlutterPlugin.setConsumerKey("GXZdl8gKO29DqNE43ObFSNmFXxrcEVmZ");
-  MpesaFlutterPlugin.setConsumerSecret("TDNGFx62w2RqnxFl");
-
 
   const PLAY_STORE_URL =
       'https://play.google.com/store/apps/details?id=com.nadia.e_lorry';

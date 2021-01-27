@@ -1,6 +1,7 @@
 import 'package:e_lorry/admin/adminHome.dart';
 import 'package:e_lorry/approvals/appTabs.dart';
 import 'package:e_lorry/manager/dailyReport.dart';
+import 'package:e_lorry/manager/reporting/genReport.dart';
 import 'package:e_lorry/signup.dart';
 import 'package:e_lorry/user/fuelRequest.dart';
 import 'package:e_lorry/user/partRequest.dart';
@@ -99,34 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  versionCheck(context) async {
-    //Get Current installed version of app
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    double currentVersion = double.parse(info.version.trim().replaceAll(".", ""));
 
-    //Get Latest version info from firebase config
-    final RemoteConfig remoteConfig = await RemoteConfig.instance;
-
-    try {
-      // Using default duration to force fetching from remote server.
-      await remoteConfig.fetch(expiration: const Duration(seconds: 0));
-      await remoteConfig.activateFetched();
-      remoteConfig.getString('force_update_current_version');
-      double newVersion = double.parse(remoteConfig
-          .getString('force_update_current_version')
-          .trim()
-          .replaceAll(".", ""));
-      if (newVersion > currentVersion) {
-        _showVersionDialog(context);
-      }
-    } on FetchThrottledException catch (exception) {
-      // Fetch throttled.
-      print(exception);
-    } catch (exception) {
-      print('Unable to fetch remote config. Cached or default values will be '
-          'used');
-    }
-  }
 
 
 
@@ -229,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
               _messaging.subscribeToTopic('manager${document['company']}');
               _messaging.subscribeToTopic('all${document['company']}');
               Navigator.of(context).pushReplacement(new CupertinoPageRoute(
-                  builder: (BuildContext context) => new PdfViewerPage()
+                  builder: (BuildContext context) => new dailyRep()
               ));
             }
             if(id == "Accounts" ) {
@@ -316,11 +290,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   @override
   void initState() {
-    try {
-      versionCheck(context);
-    } catch (e) {
-      print(e);
-    }
     checkedValue = false;
     changeTheme();
     super.initState();
@@ -818,43 +787,9 @@ class _LoggedState extends State<Logged> {
     );
   }
 
-  versionCheck(context) async {
-    //Get Current installed version of app
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    double currentVersion = double.parse(info.version.trim().replaceAll(".", ""));
-
-    //Get Latest version info from firebase config
-    final RemoteConfig remoteConfig = await RemoteConfig.instance;
-
-    try {
-      // Using default duration to force fetching from remote server.
-      await remoteConfig.fetch(expiration: const Duration(seconds: 0));
-      await remoteConfig.activateFetched();
-      remoteConfig.getString('force_update_current_version');
-      double newVersion = double.parse(remoteConfig
-          .getString('force_update_current_version')
-          .trim()
-          .replaceAll(".", ""));
-      if (newVersion > currentVersion) {
-        _showVersionDialog(context);
-      }
-    } on FetchThrottledException catch (exception) {
-      // Fetch throttled.
-      print(exception);
-    } catch (exception) {
-      print('Unable to fetch remote config. Cached or default values will be '
-          'used');
-    }
-  }
   @override
   void initState() {
     checkLoggedin();
-    try {
-      versionCheck(context);
-    } catch (e) {
-      print(e);
-    }
-
     super.initState();
 
 

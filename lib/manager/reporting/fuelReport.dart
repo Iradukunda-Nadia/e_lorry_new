@@ -16,7 +16,7 @@ fuelReportView(context) async {
   final Document pdf = Document();
 
   List<List<String>> serve = new List();
-  serve.add(<String>['TRUCK', 'CURR LTRS','REQUESTED FUEL','PER LTR', 'TOTAL (KSH.)', 'FUEL STATION', 'TILL', 'RECEPIENT', 'REQUESTED BY', 'STATUS', 'NEW READING'],);
+  serve.add(<String>['TRUCK', 'LITRES','REQUESTED FUEL','PER LTR', 'TOTAL (KSH.)', 'FUEL STATION', 'PAYMENT METHOD', 'RECEIPIENT', 'REQUESTED BY', 'STATUS', 'NEW READING'],);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String userCompany = prefs.getString('company');
   final QuerySnapshot result =
@@ -32,7 +32,7 @@ fuelReportView(context) async {
       snapshot.data['Price per liter'],
       snapshot.data['Total'],
       snapshot.data['FuelStaion'],
-      snapshot.data['Till'],
+      snapshot.data['payMethod'],
       snapshot.data['Receipent'],
       snapshot.data['reqby'],
       snapshot.data['status'],

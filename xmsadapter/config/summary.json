@@ -1,0 +1,30 @@
+{
+  "compileSdkVersion": 29,
+  "minSdkVersion": 19,
+  "targetSdkVersion": 29,
+  "pluginVersion": null,
+  "moduleLocation": "C:/Users/HP/Desktop/me/e_lorry\\xmsadapter",
+  "app": false,
+  "kitNames": [],
+  "strategy": [
+    "GOrH"
+  ],
+  "allFiles": {
+    "README.md": "c4ad1fa0d2081831b0f304c868a831e04a3965f38fe90707f160130ee5c0e91c",
+    "build.gradle": "f0de519f5b1db4d8e31a6ea0f9f39f2502e921ec5830d1b7debe76b957fc7592",
+    "scripts\\productFlavor.gradle": "",
+    "src\\main\\AndroidManifest.xml": "00b2afdad84e6b4656d75ac61a1e055e56a15f06bdf0f54f4cd0c497023a70f7",
+    "src\\main\\java\\org\\xms\\g\\utils\\BridgeMethodUtils.java": "5152b2c1775c3730c5e19735be43cb74ec98555d02c10deb0baf348d658b0937",
+    "src\\main\\java\\org\\xms\\g\\utils\\Function.java": "75088211117a22c222761168e86e3fad4c3c8e9bc41d1526fcfe8d06bd23b258",
+    "src\\main\\java\\org\\xms\\g\\utils\\GlobalEnvSetting.java": "d77967b7df41e09fcb8628eddb9c82847dd2f55c474296174aaaced40e1e05cd",
+    "src\\main\\java\\org\\xms\\g\\utils\\Parameter.java": "8deb429983ed3d06f3d3fc2b55b34a73638d7ea1158cd309eb38201b1524eebd",
+    "src\\main\\java\\org\\xms\\g\\utils\\TypeNode.java": "aebcf269cb600b4baf8638d2ea096c5af0148e1985e35aafbe25d0c0d7085f26",
+    "src\\main\\java\\org\\xms\\g\\utils\\Utils.java": "89fa34cfb8bf67dd4941667e0f10e88190f5e9239647d41461b7ce576f6c9d5b",
+    "src\\main\\java\\org\\xms\\g\\utils\\XBox.java": "fea5064bc268de75ff69e562f1506223b988193da046c82fbecdca0104fa022d",
+    "src\\main\\java\\org\\xms\\g\\utils\\XEnum.java": "d79169cd3796054f66bf1017022ff66da99f85f6f0a46873acf334d89a769ce4",
+    "src\\main\\java\\org\\xms\\g\\utils\\XGettable.java": "6a6cee5bbd8f9be1e967c1c182f114af1865a9579a762838adbf6dafd94910fa",
+    "src\\main\\java\\org\\xms\\g\\utils\\XInterface.java": "14bb0533d9ba2744245f2538a0ab1174e6fcfbf11bc20403b736e76dd472be64",
+    "src\\main\\java\\org\\xms\\g\\utils\\XObject.java": "3633e46a51aa141ba1d72cbb14ab0d6489cce20d7c676eda02eb4ca7b9011773",
+    "src\\main\\java\\org\\xms\\g\\utils\\XmsLog.java": "9478dc3315095bfa413941c7bc3cf29abf8e591e8fecf9c57543532e37458775"
+  }
+}
