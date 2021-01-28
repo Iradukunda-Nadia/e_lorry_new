@@ -50,7 +50,7 @@ export const sendToTopic = functions.firestore
          const message: admin.messaging.MessagingPayload = {
            notification: {
              title: 'New Request!',
-             body: `A request has been made`,
+             body: 'A request has been made',
            }
          };
 
@@ -84,7 +84,7 @@ export const sendPostFuel = functions.firestore
     const message: admin.messaging.MessagingPayload = {
       notification: {
         title: vehicle,
-        body: `Refilled successfully`,
+        body: 'Refilled successfully',
         image: img,
       }
     };
@@ -101,7 +101,7 @@ export const sendpartRequest = functions.firestore
     const message: admin.messaging.MessagingPayload = {
       notification: {
         title: 'New Part Request!',
-        body: `New request awaiting approval`,
+        body: 'New request awaiting approval',
       }
     };
 
@@ -117,7 +117,7 @@ export const sendfuelRequest = functions.firestore
     const message: admin.messaging.MessagingPayload = {
       notification: {
         title: 'New Fuel Request!',
-        body: `New fuel request awaiting approval`,
+        body: 'New fuel request awaiting approval',
       }
     };
 
@@ -135,7 +135,7 @@ export const newMessage = functions.firestore
     const message: admin.messaging.MessagingPayload = {
       notification: {
         title: 'New Message!',
-        body: `A new message has been sent in E-lorry chat group`,
+        body: 'A new message has been sent in E-lorry chat group',
       }
     };
 
