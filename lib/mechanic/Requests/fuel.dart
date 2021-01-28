@@ -1490,7 +1490,7 @@ class _postFuelEvidenceState extends State<postFuelEvidence> {
                             child: Column(
                               children: [
                                 _image != null
-                                    ? FileImage(_image, )
+                                    ? Image.file(_image).image
                                     : Container(height: 150),
                                 _image == null
                                     ? RaisedButton(

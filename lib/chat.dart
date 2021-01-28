@@ -56,11 +56,11 @@ class _ChatState extends State<Chat> {
               new Flexible(
                 child: new StreamBuilder<QuerySnapshot> (
                   stream: Firestore.instance.collection('messages').where('company', isEqualTo: userCompany)
-                      .orderBy('time').snapshots(),
+                      .orderBy('time', descending: false).snapshots(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
                     return snapshot.hasData ? new ListView(
                       shrinkWrap: true,
-                        reverse: true,
+                        reverse: false,
                       children: snapshot.data.documents.map((DocumentSnapshot messageSnapshot) {
                         return new ChatMessageListItem(
                           messageSnapshot: messageSnapshot,
