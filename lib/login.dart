@@ -309,7 +309,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     size: const Size(40, 40),
                     child: ClipOval(
                         child: Container(
-                          color: Colors.black,
+                          child: Image.asset(
+                            logoImage,
+                            fit: BoxFit.contain,
+                          ),
                         ))),
                 title: Text(message['notification']['title']),
                 subtitle: Text(message['notification']['body']),

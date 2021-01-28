@@ -59,7 +59,8 @@ class _ChatState extends State<Chat> {
                       .orderBy('time').snapshots(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
                     return snapshot.hasData ? new ListView(
-                        reverse: false,
+                      shrinkWrap: true,
+                        reverse: true,
                       children: snapshot.data.documents.map((DocumentSnapshot messageSnapshot) {
                         return new ChatMessageListItem(
                           messageSnapshot: messageSnapshot,
