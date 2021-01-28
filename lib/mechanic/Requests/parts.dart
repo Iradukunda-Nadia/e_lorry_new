@@ -1759,7 +1759,14 @@ class _postPartsEvidenceState extends State<postPartsEvidence> {
                             child: Column(
                               children: [
                                 _image != null
-                                    ? Image.file(_image).image
+                                    ? Container(
+
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(image: FileImage(File(_image.path)),
+                                          fit: BoxFit.cover)
+                                  ),
+                                  height: 150,
+                                )
                                     : Container(height: 150),
                                 _image == null
                                     ? RaisedButton(

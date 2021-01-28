@@ -324,7 +324,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           );
-        }, duration: Duration(milliseconds: 4000));
+        }, duration: Duration(milliseconds: 7000));
 
         print(message['notification']['title']);
       },
