@@ -9,6 +9,7 @@ import 'package:e_lorry/user/truck_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'nighoutApproval.dart';
 
 import '../login.dart';
 import 'fuelapproval.dart';
@@ -249,6 +250,40 @@ class _ApprovalsState extends State<Approvals> {
                       child: new Center(
                           child: new Text(
                             "Material requests",
+                            style: new TextStyle(
+                                color: const Color(0xff016836), fontSize: 20.0),
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding:
+              const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40.0),
+              child: new InkWell(
+                onTap: () {
+                  Navigator.of(context).push(new CupertinoPageRoute(
+                      builder: (BuildContext context) => new noApproval()
+                  ));
+                },
+                child: new Container(
+                  height: 60.0,
+                  margin: new EdgeInsets.only(top: 5.0),
+                  child: new Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: new Container(
+                      margin: new EdgeInsets.only(
+                          left: 10.0, right: 10.0, bottom: 2.0),
+                      height: 60.0,
+                      decoration: new BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: new BorderRadius.all(
+                              new Radius.circular(20.0))),
+                      child: new Center(
+                          child: new Text(
+                            "Night-Out requests",
                             style: new TextStyle(
                                 color: const Color(0xff016836), fontSize: 20.0),
                           )),

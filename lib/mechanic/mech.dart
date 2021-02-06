@@ -1,4 +1,5 @@
 import 'package:e_lorry/login.dart';
+import 'package:e_lorry/mechanic/Requests/nightOut.dart';
 import 'package:e_lorry/mechanic/testForms.dart';
 import 'package:e_lorry/user/fuelRequest.dart';
 import 'package:e_lorry/user/requisition.dart';
@@ -110,6 +111,19 @@ class _MechState extends State<Mech> {
               title: new Text("Part Requests"),
               onTap: (){
                 Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new parts()));
+              },
+            ),
+            new Divider(),
+            new ListTile(
+              trailing: new CircleAvatar(
+                child: new Icon(Icons.receipt,
+                  color: Colors.white,
+                  size: 20.0,
+                ),
+              ),
+              title: new Text("Night Out Requests"),
+              onTap: (){
+                Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new NightOut()));
               },
             ),
 
