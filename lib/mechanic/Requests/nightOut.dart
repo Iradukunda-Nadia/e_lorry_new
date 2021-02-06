@@ -627,8 +627,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => travelR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -669,8 +667,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => travelN = val,
                                     onChanged: (val){
                                       setState(() {
@@ -766,8 +762,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => onoR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -808,8 +802,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => onoN = val,
                                     onChanged: (val){
                                       setState(() {
@@ -905,8 +897,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => emptyR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -947,8 +937,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => emptyN = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1044,8 +1032,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => hireR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1087,8 +1073,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => hireN = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1184,8 +1168,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => boatR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1226,8 +1208,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => boatN = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1323,8 +1303,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => ferryR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1342,7 +1320,8 @@ class _noRequestState extends State<noRequest> {
                               )
                               //container
                             ],
-                          )),
+                          )
+                      ),
                       Flexible(
                           child: Column(
                             children: <Widget>[
@@ -1365,8 +1344,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => ferryN = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1464,8 +1441,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => offLoadR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1483,7 +1458,8 @@ class _noRequestState extends State<noRequest> {
                               )
                               //container
                             ],
-                          )),
+                          )
+                      ),
                       Flexible(
                           child: Column(
                             children: <Widget>[
@@ -1506,8 +1482,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => offLoadN = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1524,7 +1498,8 @@ class _noRequestState extends State<noRequest> {
                               )
                               //container
                             ],
-                          )),
+                          )
+                      ),
                       Flexible(
                           child: Column(
                             children: <Widget>[
@@ -1603,8 +1578,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => cessR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1622,7 +1595,8 @@ class _noRequestState extends State<noRequest> {
                               )
                               //container
                             ],
-                          )),
+                          )
+                      ),
                       Flexible(
                           child: Column(
                             children: <Widget>[
@@ -1645,8 +1619,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => cessN = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1663,7 +1635,8 @@ class _noRequestState extends State<noRequest> {
                               )
                               //container
                             ],
-                          )),
+                          )
+                      ),
                       Flexible(
                           child: Column(
                             children: <Widget>[
@@ -1742,8 +1715,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => fuelR = val,
                                     onChanged: (val){
                                       setState(() {
@@ -1785,8 +1756,6 @@ class _noRequestState extends State<noRequest> {
                                             fontSize: 8
                                         )
                                     ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
                                     onSaved: (val) => fuelN = val,
                                     onChanged: (val){
                                       setState(() {
