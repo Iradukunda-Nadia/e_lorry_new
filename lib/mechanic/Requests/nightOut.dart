@@ -99,99 +99,116 @@ class _NightOutState extends State<NightOut> {
                   itemCount: snapshot.data.documents.length,
                   itemBuilder: (context, index) {
                     var doc = snapshot.data.documents[index];
-                    return Card(
-                      child: ListTile(
-                        subtitle: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(doc.data["Truck"],style: new TextStyle(color: Colors.black),),
-                            new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                new Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    new SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    new Text(
-                                      doc.data["date"],
-                                      style: new TextStyle(color: Colors.grey),
-                                    )
-                                  ],
-                                ),
-                                new Text(
-                                  doc.data["time"],
-                                  style: new TextStyle(
-
-                                      color: Colors.indigo,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ],
+                    return Container(
+                      decoration: doc.data['status'] == 'Approved' ? BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.green,
+                              spreadRadius: 4,
+                              blurRadius: 10,
+                              offset: Offset(0, 0),
                             ),
-                          ],
-                        ),
-                        trailing: new Container(
-                          margin: const EdgeInsets.all(10.0),
-                          padding: const EdgeInsets.all(3.0),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.red[900])
+                            BoxShadow(
+                              color: Colors.green,
+                              spreadRadius: -4,
+                              blurRadius: 5,
+                              offset: Offset(0, 0),
+                            )
+                          ]): BoxDecoration(),
+                      child: Card(
+                        child: ListTile(
+                          subtitle: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(doc.data["Truck"],style: new TextStyle(color: Colors.black),),
+                              new Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  new Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      new SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      new Text(
+                                        doc.data["date"],
+                                        style: new TextStyle(color: Colors.grey),
+                                      )
+                                    ],
+                                  ),
+                                  new Text(
+                                    doc.data["time"],
+                                    style: new TextStyle(
+
+                                        color: Colors.indigo,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                          child: Text(doc.data['status'], style: TextStyle(color: Colors.red[900]),),
+                          trailing: new Container(
+                            margin: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(3.0),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.red[900])
+                            ),
+                            child: Text(doc.data['status'], style: TextStyle(color: Colors.red[900]),),
+                          ),
+                          onTap: () async {
+                            setState(() {
+                              _currentDocument = doc;
+                            });
+                            Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new noDetail(
+
+                              truck: doc.data["Truck"],
+                              driver: doc.data["driver"],
+                              number: doc.data["driverPhone"],
+                              route: doc.data["route"],
+                              drops: doc.data["drops"],
+                              contract: doc.data["contract"],
+                              travelR: doc.data["travelR"],
+                              travelN: doc.data["travelN"],
+                              travelT: doc.data["travelT"],
+                              onoR: doc.data["onoR"],
+                              onoN: doc.data["onoN"],
+                              onoT: doc.data["onoT"],
+                              emptyR: doc.data["emptyR"],
+                              emptyN: doc.data["emptyN"],
+                              emptyT: doc.data["emptyT"],
+                              hireR: doc.data["hireR"],
+                              hireN: doc.data["hireN"],
+                              hireT: doc.data["hireT"],
+                              boatR: doc.data["boatR"],
+                              boatN: doc.data["boatN"],
+                              boatT: doc.data["boatT"],
+                              ferryR: doc.data["ferryR"],
+                              ferryN: doc.data["ferryN"],
+                              ferryT: doc.data["ferryT"],
+                              offLoadR: doc.data["offLoadR"],
+                              offLoadN: doc.data["offLoadN"],
+                              offLoadT: doc.data["offLoadT"],
+                              cessR: doc.data["cessR"],
+                              cessN: doc.data["cessN"],
+                              cessT: doc.data["cessT"],
+                              fuelR: doc.data["fuelR"],
+                              fuelN: doc.data["fuelN"],
+                              fuelT: doc.data["fuelT"],
+
+                              date: doc.data["date"],
+                              status: doc.data["status"],
+                              reqby: doc.data["reqby"],
+                              docID: doc.documentID,
+                              payMethod: doc.data['payMethod'],
+                              company: doc.data['company'],
+                              token: doc.data['token'],
+                              total: doc.data['total'],
+
+
+                            )));
+                          },
                         ),
-                        onTap: () async {
-                          setState(() {
-                            _currentDocument = doc;
-                          });
-                          Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new noDetail(
-
-                            truck: doc.data["Truck"],
-                            driver: doc.data["driver"],
-                            number: doc.data["driverPhone"],
-                            route: doc.data["route"],
-                            drops: doc.data["drops"],
-                            contract: doc.data["contract"],
-                            travelR: doc.data["travelR"],
-                            travelN: doc.data["travelN"],
-                            travelT: doc.data["travelT"],
-                            onoR: doc.data["onoR"],
-                            onoN: doc.data["onoN"],
-                            onoT: doc.data["onoT"],
-                            emptyR: doc.data["emptyR"],
-                            emptyN: doc.data["emptyN"],
-                            emptyT: doc.data["emptyT"],
-                            hireR: doc.data["hireR"],
-                            hireN: doc.data["hireN"],
-                            hireT: doc.data["hireT"],
-                            boatR: doc.data["boatR"],
-                            boatN: doc.data["boatN"],
-                            boatT: doc.data["boatT"],
-                            ferryR: doc.data["ferryR"],
-                            ferryN: doc.data["ferryN"],
-                            ferryT: doc.data["ferryT"],
-                            offLoadR: doc.data["offLoadR"],
-                            offLoadN: doc.data["offLoadN"],
-                            offLoadT: doc.data["offLoadT"],
-                            cessR: doc.data["cessR"],
-                            cessN: doc.data["cessN"],
-                            cessT: doc.data["cessT"],
-                            fuelR: doc.data["fuelR"],
-                            fuelN: doc.data["fuelN"],
-                            fuelT: doc.data["fuelT"],
-
-                            date: doc.data["date"],
-                            status: doc.data["status"],
-                            reqby: doc.data["reqby"],
-                            docID: doc.documentID,
-                            payMethod: doc.data['payMethod'],
-                            company: doc.data['company'],
-                            token: doc.data['token'],
-                            total: doc.data['total'],
-
-
-                          )));
-                        },
                       ),
                     );
 

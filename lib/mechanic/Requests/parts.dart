@@ -106,81 +106,98 @@ class _partsState extends State<parts> {
                   itemCount: snapshot.data.documents.length,
                   itemBuilder: (context, index) {
                     var doc = snapshot.data.documents[index];
-                    return Card(
-                      child: ListTile(
-                        title: Text(doc.data["Item"], style: new TextStyle(color: Colors.black),),
-                        subtitle: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(doc.data["Truck"],style: new TextStyle(color: Colors.black),),
-                            new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                new Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    new SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    new Text(
-                                      doc.data["date"],
-                                      style: new TextStyle(color: Colors.grey),
-                                    )
-                                  ],
-                                ),
-                                new Text(
-                                  doc.data["time"],
-                                  style: new TextStyle(
-
-                                      color: Colors.indigo,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ],
+                    return Container(
+                      decoration: doc.data['status'] == 'Approved' ? BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.green,
+                              spreadRadius: 4,
+                              blurRadius: 10,
+                              offset: Offset(0, 0),
                             ),
-                          ],
-                        ),
-                        trailing: new Container(
-                          margin: const EdgeInsets.all(10.0),
-                          padding: const EdgeInsets.all(3.0),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.red[900])
+                            BoxShadow(
+                              color: Colors.green,
+                              spreadRadius: -4,
+                              blurRadius: 5,
+                              offset: Offset(0, 0),
+                            )
+                          ]): BoxDecoration(),
+                      child: Card(
+                        child: ListTile(
+                          title: Text(doc.data["Item"], style: new TextStyle(color: Colors.black),),
+                          subtitle: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(doc.data["Truck"],style: new TextStyle(color: Colors.black),),
+                              new Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  new Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      new SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      new Text(
+                                        doc.data["date"],
+                                        style: new TextStyle(color: Colors.grey),
+                                      )
+                                    ],
+                                  ),
+                                  new Text(
+                                    doc.data["time"],
+                                    style: new TextStyle(
+
+                                        color: Colors.indigo,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                          child: Text(doc.data['status'], style: TextStyle(color: Colors.red[900]),),
+                          trailing: new Container(
+                            margin: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(3.0),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.red[900])
+                            ),
+                            child: Text(doc.data['status'], style: TextStyle(color: Colors.red[900]),),
+                          ),
+                          onTap: () async {
+                            setState(() {
+                              _currentDocument = doc;
+                            });
+
+                            Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new reqDetail(
+
+                              itemName: doc.data["Item"],
+                              itemQuantity: doc.data["Quantity"],
+                              itemNumber: doc.data["Truck"],
+                              reqName: doc.data["request by"],
+                              reqDate: doc.data["date"],
+                              brand1: doc.data["Supplier 1"],
+                              reqOne: doc.data["quoteOne"],
+                              brand2: doc.data["Supplier 2"],
+                              reqTwo: doc.data["quoteTwo"],
+                              brand3: doc.data["Supplier 3"],
+                              reqThree: doc.data["quoteThree"],
+                              reqBrand: doc.data["brand"],
+                              reqPrice: doc.data["price"],
+                              reqSupplier: doc.data["supplier"],
+                              reqComment: doc.data["comment"],
+                              approvedQuote: doc.data["approvedQuote"],
+                              approvedPrice: doc.data["price"],
+                              reqStatus: doc.data["status"],
+                              ID: doc.documentID,
+                              receivedBy: doc.data['Received by'],
+                              img : doc.data['image'],
+                              userComp: doc.data['company'],
+
+
+                            )));
+                          },
                         ),
-                        onTap: () async {
-                          setState(() {
-                            _currentDocument = doc;
-                          });
-
-                          Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new reqDetail(
-
-                            itemName: doc.data["Item"],
-                            itemQuantity: doc.data["Quantity"],
-                            itemNumber: doc.data["Truck"],
-                            reqName: doc.data["request by"],
-                            reqDate: doc.data["date"],
-                            brand1: doc.data["Supplier 1"],
-                            reqOne: doc.data["quoteOne"],
-                            brand2: doc.data["Supplier 2"],
-                            reqTwo: doc.data["quoteTwo"],
-                            brand3: doc.data["Supplier 3"],
-                            reqThree: doc.data["quoteThree"],
-                            reqBrand: doc.data["brand"],
-                            reqPrice: doc.data["price"],
-                            reqSupplier: doc.data["supplier"],
-                            reqComment: doc.data["comment"],
-                            approvedQuote: doc.data["approvedQuote"],
-                            approvedPrice: doc.data["price"],
-                            reqStatus: doc.data["status"],
-                            ID: doc.documentID,
-                            receivedBy: doc.data['Received by'],
-                            img : doc.data['image'],
-                            userComp: doc.data['company'],
-
-
-                          )));
-                        },
                       ),
                     );
 

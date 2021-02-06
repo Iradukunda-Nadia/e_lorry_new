@@ -132,70 +132,87 @@ class _ItemsState extends State<Items> {
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   var doc = snapshot.data.documents[index];
-                  return Card(
-                    child: ListTile(
-                      title: Text(doc.data["Truck"]),
-                      subtitle: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              new SizedBox(
-                                width: 5.0,
-                              ),
-                              new Text(
-                                doc.data["date"],
-                                style: new TextStyle(color: Colors.grey, fontSize: 12.0,),
-                              )
-                            ],
+                  return Container(
+                    decoration: doc.data['status'] == 'pending' ? BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.green,
+                            spreadRadius: 4,
+                            blurRadius: 10,
+                            offset: Offset(0, 0),
                           ),
-                          new Text(
-                            doc.data["time"],
-                            style: new TextStyle(
-                                fontSize: 11.0,
-                                color: Colors.indigo,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      trailing: new Container(
-                        margin: const EdgeInsets.all(10.0),
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red[900])
+                          BoxShadow(
+                            color: Colors.green,
+                            spreadRadius: -4,
+                            blurRadius: 5,
+                            offset: Offset(0, 0),
+                          )
+                        ]): BoxDecoration(),
+                    child: Card(
+                      child: ListTile(
+                        title: Text(doc.data["Truck"]),
+                        subtitle: new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                new SizedBox(
+                                  width: 5.0,
+                                ),
+                                new Text(
+                                  doc.data["date"],
+                                  style: new TextStyle(color: Colors.grey, fontSize: 12.0,),
+                                )
+                              ],
+                            ),
+                            new Text(
+                              doc.data["time"],
+                              style: new TextStyle(
+                                  fontSize: 11.0,
+                                  color: Colors.indigo,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
                         ),
-                        child: Text(doc.data['status'], style: TextStyle(color: Colors.red[900]),),
+                        trailing: new Container(
+                          margin: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.red[900])
+                          ),
+                          child: Text(doc.data['status'], style: TextStyle(color: Colors.red[900]),),
+                        ),
+                        onTap: () async {
+                          setState(() {
+                            _currentDocument = doc;
+                          });
+
+                          Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new AppFuel(
+
+                            truck: doc.data["Truck"],
+                            currLts: doc.data["Current litres"],
+                            date: doc.data["date"],
+                            ppl: doc.data["Price per liter"],
+                            recepient: doc.data["Receipent"],
+                            reqFuel: doc.data["Requested fuel"],
+                            till: doc.data["Till"],
+                            total: doc.data["Total"],
+                            fStation: doc.data["FuelStaion"],
+                            status: doc.data["status"],
+                            reqBy: doc.data["reqby"],
+                            itemID: doc.documentID,
+                            image: doc.data["image"],
+                            newLtrs: doc.data['New Fuel reading'],
+                            payMethod: doc.data['payMethod'],
+                            acc: doc.data['accNo'],
+                            userC: doc.data['company'],
+                            token: doc.data['token']
+
+
+                          )));
+                        },
                       ),
-                      onTap: () async {
-                        setState(() {
-                          _currentDocument = doc;
-                        });
-
-                        Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new AppFuel(
-
-                          truck: doc.data["Truck"],
-                          currLts: doc.data["Current litres"],
-                          date: doc.data["date"],
-                          ppl: doc.data["Price per liter"],
-                          recepient: doc.data["Receipent"],
-                          reqFuel: doc.data["Requested fuel"],
-                          till: doc.data["Till"],
-                          total: doc.data["Total"],
-                          fStation: doc.data["FuelStaion"],
-                          status: doc.data["status"],
-                          reqBy: doc.data["reqby"],
-                          itemID: doc.documentID,
-                          image: doc.data["image"],
-                          newLtrs: doc.data['New Fuel reading'],
-                          payMethod: doc.data['payMethod'],
-                          acc: doc.data['accNo'],
-                          userC: doc.data['company'],
-                          token: doc.data['token']
-
-
-                        )));
-                      },
                     ),
                   );
 
@@ -896,6 +913,7 @@ String userComp ;
                                             'time': DateTime.now(),
                                             'company': userComp,
                                             'token': widget.token,
+                                            'payment': 'Fuel',
 
                                           });
                                           _approveCommand();

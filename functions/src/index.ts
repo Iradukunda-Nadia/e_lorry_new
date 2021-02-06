@@ -27,11 +27,12 @@ export const sendToDevice = functions.firestore
 
     let tokens = snapshot.get('token');
     let text = snapshot.get('text');
+    let payment = snapshot.get('payment');
 
 
     const payload: admin.messaging.MessagingPayload = {
       notification: {
-        title: 'Request Paid!!',
+        title: `${payment} paid successfully`,
         body: text,
 
       }
@@ -108,6 +109,22 @@ export const sendpartRequest = functions.firestore
     return fcm.sendToTopic(aTopic, message);
   });
 
+export const sendNightOutRequest = functions.firestore
+  .document('NightOutRequest/{Item}')
+  .onCreate(async snapshot => {
+  let comp = snapshot.get('company');
+  let NTopic = `approvals${comp}`;
+
+    const message: admin.messaging.MessagingPayload = {
+      notification: {
+        title: 'New Night-Out Request!',
+        body: 'New Night-Out request awaiting approval',
+      }
+    };
+
+    return fcm.sendToTopic(NTopic, message);
+  });
+
 export const sendfuelRequest = functions.firestore
   .document('fuelRequest/{Item}')
   .onCreate(async snapshot => {
@@ -123,8 +140,6 @@ export const sendfuelRequest = functions.firestore
 
     return fcm.sendToTopic(fTopic, message);
   });
-
-
 
 export const newMessage = functions.firestore
   .document('messages/{Item}')

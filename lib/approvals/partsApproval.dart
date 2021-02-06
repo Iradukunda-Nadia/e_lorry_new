@@ -130,90 +130,107 @@ class _ItemsState extends State<Items> {
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   var doc = snapshot.data.documents[index];
-                  return Card(
-                    child: ListTile(
-                      title: Text(doc.data["Item"], style: new TextStyle(color: Colors.black),),
-                      subtitle: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(doc.data["Truck"],style: new TextStyle(color: Colors.black),),
-                          new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              new Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  new SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  new Text(
-                                    doc.data["date"],
-                                    style: new TextStyle(color: Colors.grey),
-                                  )
-                                ],
-                              ),
-                              new Text(
-                                doc.data["time"],
-                                style: new TextStyle(
-
-                                    color: Colors.indigo,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
+                  return Container(
+                    decoration: doc.data['status'] == 'pending' ? BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.green,
+                            spreadRadius: 4,
+                            blurRadius: 10,
+                            offset: Offset(0, 0),
                           ),
-                        ],
-                      ),
-                      trailing: new Container(
-                        margin: const EdgeInsets.all(10.0),
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red[900])
+                          BoxShadow(
+                            color: Colors.green,
+                            spreadRadius: -4,
+                            blurRadius: 5,
+                            offset: Offset(0, 0),
+                          )
+                        ]): BoxDecoration(),
+                    child: Card(
+                      child: ListTile(
+                        title: Text(doc.data["Item"], style: new TextStyle(color: Colors.black),),
+                        subtitle: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(doc.data["Truck"],style: new TextStyle(color: Colors.black),),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      doc.data["date"],
+                                      style: new TextStyle(color: Colors.grey),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  doc.data["time"],
+                                  style: new TextStyle(
+
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        child: Text(doc.data['status'], style: TextStyle(color: Colors.red[900]),),
+                        trailing: new Container(
+                          margin: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.red[900])
+                          ),
+                          child: Text(doc.data['status'], style: TextStyle(color: Colors.red[900]),),
+                        ),
+                        onTap: () async {
+                          setState(() {
+                            _currentDocument = doc;
+                          });
+
+                          Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new Approval(
+
+                            itemID: doc.documentID,
+                            itemName: doc.data["Item"],
+                            itemQuantity: doc.data["Quantity"],
+                            itemNumber: doc.data["Truck"],
+                            reqName: doc.data["request by"],
+                            reqDate: doc.data["date"],
+                            brand1: doc.data["Supplier 1"],
+                            reqOne: doc.data["quoteOne"],
+                            vat1: doc.data["1VAT"],
+                            brand2: doc.data["Supplier 2"],
+                            reqTwo: doc.data["quoteTwo"],
+                            vat2: doc.data["2VAT"],
+                            brand3: doc.data["Supplier 3"],
+                            reqThree: doc.data["quoteThree"],
+                            vat3: doc.data["3VAT"],
+                            reqBrand: doc.data["brand"],
+                            reqPrice: doc.data["price"],
+                            reqSupplier: doc.data["supplier"],
+                            status: doc.data["status"],
+                            reqComment: doc.data["comment"],
+                            approvedQuote: doc.data["approvedQuote"],
+                            approvedPrice: doc.data["price"],
+                            payType: doc.data["paymentType"],
+                            acc: doc.data['accNo'],
+                            recepient: doc.data["Receipent"],
+                            amount : doc.data['amount'],
+                            payMethod: doc.data['payMethod'],
+                            till: doc.data['Till'],
+                            receivedBy: doc.data['Received by'],
+                            img : doc.data['image'],
+                            token: doc.data['token']
+
+
+                          )));
+                        },
                       ),
-                      onTap: () async {
-                        setState(() {
-                          _currentDocument = doc;
-                        });
-
-                        Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new Approval(
-
-                          itemID: doc.documentID,
-                          itemName: doc.data["Item"],
-                          itemQuantity: doc.data["Quantity"],
-                          itemNumber: doc.data["Truck"],
-                          reqName: doc.data["request by"],
-                          reqDate: doc.data["date"],
-                          brand1: doc.data["Supplier 1"],
-                          reqOne: doc.data["quoteOne"],
-                          vat1: doc.data["1VAT"],
-                          brand2: doc.data["Supplier 2"],
-                          reqTwo: doc.data["quoteTwo"],
-                          vat2: doc.data["2VAT"],
-                          brand3: doc.data["Supplier 3"],
-                          reqThree: doc.data["quoteThree"],
-                          vat3: doc.data["3VAT"],
-                          reqBrand: doc.data["brand"],
-                          reqPrice: doc.data["price"],
-                          reqSupplier: doc.data["supplier"],
-                          status: doc.data["status"],
-                          reqComment: doc.data["comment"],
-                          approvedQuote: doc.data["approvedQuote"],
-                          approvedPrice: doc.data["price"],
-                          payType: doc.data["paymentType"],
-                          acc: doc.data['accNo'],
-                          recepient: doc.data["Receipent"],
-                          amount : doc.data['amount'],
-                          payMethod: doc.data['payMethod'],
-                          till: doc.data['Till'],
-                          receivedBy: doc.data['Received by'],
-                          img : doc.data['image'],
-                          token: doc.data['token']
-
-
-                        )));
-                      },
                     ),
                   );
 
@@ -1557,6 +1574,7 @@ class _ApprovalState extends State<Approval> {
                                                 'time': DateTime.now(),
                                                 'company': userCompany,
                                                 'token': widget.token,
+                                                'payment': 'Part Request',
 
                                               });
                                               _approveandPay();
