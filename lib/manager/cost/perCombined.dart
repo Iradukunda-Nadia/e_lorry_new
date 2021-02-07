@@ -80,14 +80,14 @@ class _perCombinedState extends State<perCombined> {
     rows.add(<String>['Truck', 'Date','FUEL','PARTS', 'NIGHT-OUTS' ],);
     final QuerySnapshot result =
     truckNo == 'all' && month == 'all' ?
-    Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('status', isEqualTo: 'Approved').orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month == 'all' ?
-    Firestore.instance.collection("combined").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
     truckNo == 'all' && month != 'all' ?
-    Firestore.instance.collection("combined").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month != 'all' ?
-    Firestore.instance.collection("combined").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments:
-    Firestore.instance.collection("combined").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
+    Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments:
+    Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
     final List<DocumentSnapshot> documents = result.documents;
     if (documents != null) {
 //row refer to each column of a row in csv file and rows refer to each row in a file
@@ -425,14 +425,14 @@ class _perCombinedState extends State<perCombined> {
                         new StreamBuilder(
                           stream:
                           truckNo == 'all' && month == 'all' ?
-                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('status', isEqualTo: 'Approved').orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots():
                           truckNo != 'all' && month == 'all' ?
-                          Firestore.instance.collection("combined").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
                           truckNo == 'all' && month != 'all' ?
-                          Firestore.instance.collection("combined").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
                           truckNo != 'all' && month != 'all' ?
-                          Firestore.instance.collection("combined").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
-                          Firestore.instance.collection("combined").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots(),
+                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) return new Text('Loading...');
                             return new FittedBox(
