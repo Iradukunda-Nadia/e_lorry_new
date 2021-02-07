@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
+import 'package:e_lorry/manager/cost/perTabs.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
@@ -150,6 +151,24 @@ class _dailyRepState extends State<dailyRep>  with SingleTickerProviderStateMixi
             ),
 
             new Divider(),
+
+
+
+            new ListTile(
+              trailing: new CircleAvatar(
+                child: new Icon(Icons.attach_money,
+                  color: Colors.white,
+                  size: 20.0,
+                ),
+              ),
+              title: new Text("Generate cost Report"),
+              onTap: (){
+                Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new perTabs()));
+              },
+            ),
+
+            new Divider(),
+
 
             new ListTile(
               trailing: new CircleAvatar(
