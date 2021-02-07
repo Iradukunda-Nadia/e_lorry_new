@@ -55,6 +55,7 @@ dependencies:
   hover_ussd:
     git:
       url: https://github.com/Iradukunda-Nadia/hover_ussd
+  month_picker_dialog:
 
 
 dev_dependencies:

@@ -5,6 +5,7 @@ import 'package:hover_ussd/hover_ussd.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 final HoverUssd _hoverUssd = HoverUssd();
 
@@ -1239,6 +1240,16 @@ class _AppNightOutState extends State<AppNightOut> {
                                         'company': widget.company,
                                         'token': widget.token,
                                         'payment': 'Night-Out',
+
+                                      });
+                                      Firestore.instance.collection('combined')
+                                          .add({
+                                        'nightOut': widget.total,
+                                        'truck': widget.truck,
+                                        "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
+                                        "month" : DateFormat(' yyyy- MM').format(DateTime.now()),
+                                        'timestamp': DateTime.now(),
+
 
                                       });
                                       _approveCommand();

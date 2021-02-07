@@ -17,6 +17,7 @@ import '../chat.dart';
 
 import 'package:hover_ussd/hover_ussd.dart';
 import 'package:android_intent/android_intent.dart';
+import 'package:intl/intl.dart';
 
 final HoverUssd _hoverUssd = HoverUssd();
 
@@ -424,6 +425,16 @@ class _ApprovalState extends State<Approval> {
         appPrice = widget.reqThree;
       });
     }
+    await Firestore.instance.collection('combined')
+        .add({
+      'part': appPrice,
+      'truck': widget.itemNumber,
+      "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
+      "month" : DateFormat(' yyyy- MM').format(DateTime.now()),
+      'timestamp': DateTime.now(),
+
+
+    });
     await Firestore.instance
         .collection('partRequest')
         .document(widget.itemID)
@@ -1201,6 +1212,7 @@ class _ApprovalState extends State<Approval> {
                                                       child: new Text("Approve"),
                                                       onPressed: () {
 
+
                                                         _approveCommand();
                                                         Navigator.of(context).pop();
                                                         Navigator.of(context).pop();
@@ -1575,6 +1587,16 @@ class _ApprovalState extends State<Approval> {
                                                 'company': userCompany,
                                                 'token': widget.token,
                                                 'payment': 'Part Request',
+
+                                              });
+                                              Firestore.instance.collection('combined')
+                                                  .add({
+                                                'part': widget.amount,
+                                                'truck': widget.itemNumber,
+                                                "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
+                                                "month" : DateFormat(' yyyy- MM').format(DateTime.now()),
+                                                'timestamp': DateTime.now(),
+
 
                                               });
                                               _approveandPay();

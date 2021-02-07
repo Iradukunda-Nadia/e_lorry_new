@@ -376,7 +376,7 @@ class _genFuelState extends State<genFuel> {
                             child: Column(
                               children: <Widget>[
                                 new Text(
-                                  "Materials Requested as at: ${DateFormat(' dd MMM yyyy').format(DateTime.now())}",
+                                  "Fuel Requested as at: ${DateFormat(' dd MMM yyyy').format(DateTime.now())}",
                                   style: new TextStyle(
                                       fontSize: 12.0, fontWeight: FontWeight.w700),
                                 ),
@@ -527,15 +527,6 @@ class _genPartsState extends State<genParts> {
           snapshot.data['Truck'],
           snapshot.data['Item'],
           snapshot.data['Quantity'],
-          snapshot.data['paymentType'],
-          snapshot.data['Supplier 1'],
-          snapshot.data['quoteOne'],
-          snapshot.data['1VAT'],
-          snapshot.data['Supplier 2'],
-          snapshot.data['quoteTwo'],
-          snapshot.data['2VAT'],
-          snapshot.data['Supplier 3'],
-          snapshot.data['quoteThree'],
           snapshot.data['3VAT'],
           snapshot.data['reqDate'],
           snapshot.data['request by'],

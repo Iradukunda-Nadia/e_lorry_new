@@ -26,6 +26,7 @@ import 'package:package_info/package_info.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'testPay.dart';
+import 'manager/cost/perFuel.dart';
 
 const PLAY_STORE_URL =
     'https://play.google.com/store/apps/details?id=com.nadia.e_lorry';

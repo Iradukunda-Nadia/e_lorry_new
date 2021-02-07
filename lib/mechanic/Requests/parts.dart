@@ -305,6 +305,7 @@ class _partRequestState extends State<partRequest> {
         "quoteThree" : isCredit == true? tsp : "N/A",
         '3VAT': isCredit == true?  tVAT : "N/A" ,
         "reqDate" : DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        "month" : DateFormat(' yyyy- MM').format(DateTime.now()),
         "company": userCompany,
         'status': 'pending',
         'request by':currentUser,
@@ -315,7 +316,7 @@ class _partRequestState extends State<partRequest> {
         'paymentType': payMethod,
         'Receipent': isPhone == true? _recepient: 'N/A',
         "Till": isLalji != true?_till: 'N/A',
-        'amount': isCash == true? _amount : "N/A",
+        'price': isCash == true? _amount : "N/A",
         'token': fcmToken,
 
 

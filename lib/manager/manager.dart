@@ -143,6 +143,21 @@ class _ManagerState extends State<Manager> {
 
             new ListTile(
               trailing: new CircleAvatar(
+                child: new Icon(Icons.attach_money,
+                  color: Colors.white,
+                  size: 20.0,
+                ),
+              ),
+              title: new Text("Generate cost Report"),
+              onTap: (){
+                Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new repDiv()));
+              },
+            ),
+
+            new Divider(),
+
+            new ListTile(
+              trailing: new CircleAvatar(
                 child: new Icon(Icons.assignment,
                   color: Colors.white,
                   size: 20.0,

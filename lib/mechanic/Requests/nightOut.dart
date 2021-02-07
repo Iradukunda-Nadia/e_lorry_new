@@ -330,6 +330,7 @@ class _noRequestState extends State<noRequest> {
         'fuelN': fuelN,
         'fuelT': fuelT.text,
         "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
+        "month" : DateFormat(' yyyy- MM').format(DateTime.now()),
         'timestamp': DateTime.now(),
         "company": userCompany,
         'status': 'pending',

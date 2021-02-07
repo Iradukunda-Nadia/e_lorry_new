@@ -268,6 +268,7 @@ class _fuelFormState extends State<fuelForm> {
         "Till": isLalji != true?_till: 'N/A',
         'Receipent': isPhone == true? _recepient: 'N/A',
         "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
+        "month" : DateFormat(' yyyy- MM').format(DateTime.now()),
         'timestamp': DateTime.now(),
         "company": userCompany,
         'status': 'pending',

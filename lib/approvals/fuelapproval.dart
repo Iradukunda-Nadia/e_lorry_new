@@ -4,6 +4,7 @@ import 'package:e_lorry/mechanic/Requests/fuel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 import '../chat.dart';
 import 'package:hover_ussd/hover_ussd.dart';
@@ -914,6 +915,16 @@ String userComp ;
                                             'company': userComp,
                                             'token': widget.token,
                                             'payment': 'Fuel',
+
+                                          });
+                                          Firestore.instance.collection('combined')
+                                              .add({
+                                            'fuel': widget.total,
+                                            'truck': widget.truck,
+                                            "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
+                                            "month" : DateFormat(' yyyy- MM').format(DateTime.now()),
+                                            'timestamp': DateTime.now(),
+
 
                                           });
                                           _approveCommand();
