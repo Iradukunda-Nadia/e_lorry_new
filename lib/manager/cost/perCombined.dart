@@ -83,11 +83,11 @@ class _perCombinedState extends State<perCombined> {
     truckNo == 'all' && month == 'all' ?
     await Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month == 'all' ?
-    await Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
+    await Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
     truckNo == 'all' && month != 'all' ?
     await Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month != 'all' ?
-    await Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
+    await Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
     await Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
     final List<DocumentSnapshot> documents = result.documents;
     if (documents != null) {
@@ -472,11 +472,11 @@ class _perCombinedState extends State<perCombined> {
                           truckNo == 'all' && month == 'all' ?
                           Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots():
                           truckNo != 'all' && month == 'all' ?
-                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
                           truckNo == 'all' && month != 'all' ?
                           Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
                           truckNo != 'all' && month != 'all' ?
-                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).where('truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
                           Firestore.instance.collection("combined").where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) return new Text('Loading...');
