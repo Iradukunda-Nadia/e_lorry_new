@@ -12,6 +12,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:flutter/scheduler.dart';
 
 class pertPart extends StatefulWidget {
   @override
@@ -74,14 +75,14 @@ class _pertPartState extends State<pertPart> {
     rows.add(<String>['Truck', 'Item','Quantity', "Price", "reqDate", 'request by', 'Status'],);
     final QuerySnapshot result =
     truckNo == 'all' && month == 'all' ?
-    Firestore.instance.collection("partRequest").where('company', isEqualTo: userCompany).where('status', isEqualTo: 'Approved').orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("partRequest").where('company', isEqualTo: userCompany).where('comment', isEqualTo: 'Approved').orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month == 'all' ?
-    Firestore.instance.collection("partRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("partRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
     truckNo == 'all' && month != 'all' ?
-    Firestore.instance.collection("partRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("partRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month != 'all' ?
-    Firestore.instance.collection("partRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments:
-    Firestore.instance.collection("partRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
+    Firestore.instance.collection("partRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments:
+    Firestore.instance.collection("partRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
     final List<DocumentSnapshot> documents = result.documents;
     if (documents != null) {
 //row refer to each column of a row in csv file and rows refer to each row in a file
@@ -93,7 +94,7 @@ class _pertPartState extends State<pertPart> {
           snapshot.data['Price'],
           snapshot.data['reqDate'],
           snapshot.data['request by'],
-          snapshot.data['Price'],
+          snapshot.data['status'],
         ];
         rows.add(recind);
       });
@@ -125,9 +126,21 @@ class _pertPartState extends State<pertPart> {
       );
     }
   }
+
+  String _cont;
+  int _contri;
+  String contString;
+  int total = 0;
+  int newTotal;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text( newTotal != null ? 'Total spent: KSH.${contString}': 'waiting ...', style: TextStyle(fontSize: 10),),
+        centerTitle: true,
+        backgroundColor: const Color(0xff016836),
+      ),
 
       floatingActionButton: FloatingActionButton.extended(
         label: Row(children: [
@@ -421,14 +434,14 @@ class _pertPartState extends State<pertPart> {
                         new StreamBuilder(
                           stream:
                           truckNo == 'all' && month == 'all' ?
-                          Firestore.instance.collection("partRequest").where('company', isEqualTo: userCompany).where('status', isEqualTo: 'Approved').orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("partRequest").where('company', isEqualTo: userCompany).where('comment', isEqualTo: 'Approved').orderBy('timestamp', descending: true).snapshots():
                           truckNo != 'all' && month == 'all' ?
-                          Firestore.instance.collection("partRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("partRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
                           truckNo == 'all' && month != 'all' ?
-                          Firestore.instance.collection("partRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("partRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
                           truckNo != 'all' && month != 'all' ?
-                          Firestore.instance.collection("partRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
-                          Firestore.instance.collection("partRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots(),
+                          Firestore.instance.collection("partRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("partRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) return new Text('Loading...');
                             return new FittedBox(
@@ -463,6 +476,17 @@ class _pertPartState extends State<pertPart> {
   }
 
   List<DataRow> _createRows(QuerySnapshot snapshot) {
+    int tot = 0;
+    snapshot.documents.forEach((document)
+    {
+      SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {
+        _cont = document['price'];
+        _contri = int.parse(_cont);
+        newTotal = tot += _contri;
+        contString = newTotal.toString();
+      }));
+
+    });
 
     List<DataRow> newList = snapshot.documents.map((doc) {
       return new DataRow(

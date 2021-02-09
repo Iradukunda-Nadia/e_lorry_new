@@ -94,12 +94,11 @@ class _dailyRepState extends State<dailyRep>  with SingleTickerProviderStateMixi
               ),
             ),
 
-            new Divider(),
             new ListTile(
               trailing: new CircleAvatar(
                 child: new Icon(Icons.directions_car,
                   color: Colors.white,
-                  size: 20.0,
+                  size: 15.0,
                 ),
               ),
               title: new Text("Truck Post Trip"),
@@ -113,7 +112,7 @@ class _dailyRepState extends State<dailyRep>  with SingleTickerProviderStateMixi
               trailing: new CircleAvatar(
                 child: new Icon(Icons.settings,
                   color: Colors.white,
-                  size: 20.0,
+                  size: 15.0,
                 ),
               ),
               title: new Text("Truck Service"),
@@ -126,7 +125,7 @@ class _dailyRepState extends State<dailyRep>  with SingleTickerProviderStateMixi
               trailing: new CircleAvatar(
                 child: new Icon(Icons.directions_car,
                   color: Colors.white,
-                  size: 20.0,
+                  size: 15.0,
                 ),
               ),
               title: new Text("Car Sevice"),
@@ -141,7 +140,7 @@ class _dailyRepState extends State<dailyRep>  with SingleTickerProviderStateMixi
               trailing: new CircleAvatar(
                 child: new Icon(Icons.settings,
                   color: Colors.white,
-                  size: 20.0,
+                  size: 15.0,
                 ),
               ),
               title: new Text("LPO"),
@@ -158,7 +157,7 @@ class _dailyRepState extends State<dailyRep>  with SingleTickerProviderStateMixi
               trailing: new CircleAvatar(
                 child: new Icon(Icons.attach_money,
                   color: Colors.white,
-                  size: 20.0,
+                  size: 15.0,
                 ),
               ),
               title: new Text("Generate cost Report"),
@@ -174,7 +173,7 @@ class _dailyRepState extends State<dailyRep>  with SingleTickerProviderStateMixi
               trailing: new CircleAvatar(
                 child: new Icon(Icons.assignment,
                   color: Colors.white,
-                  size: 20.0,
+                  size: 15.0,
                 ),
               ),
               title: new Text("Report"),
@@ -189,7 +188,7 @@ class _dailyRepState extends State<dailyRep>  with SingleTickerProviderStateMixi
                 trailing: new CircleAvatar(
                   child: new Icon(Icons.subdirectory_arrow_left,
                     color: Colors.white,
-                    size: 20.0,
+                    size: 15.0,
                   ),
                 ),
                 title: new Text("Logout"),

@@ -21,17 +21,16 @@ class _perTabsState extends State<perTabs> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 60.0,
-              child: new Icon(Icons.assignment,
-                color: const Color(0xff016836),
-                size: 50.0,
-              ),
-            ),
+
             new SizedBox(
               height: 10.0,
             ),
+            new Center(
+                child: new Text(
+                  "Select Category to generate", textAlign: TextAlign.center,
+                  style: new TextStyle(
+                      color: const Color(0xffffffff), fontSize: 30.0, fontWeight: FontWeight.bold ),
+                )),
             Padding(
               padding:
               const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40.0),
@@ -58,7 +57,7 @@ class _perTabsState extends State<perTabs> {
                           child: new Text(
                             "Fuel request Cost Report",
                             style: new TextStyle(
-                                color: const Color(0xff016836), fontSize: 20.0),
+                                color: const Color(0xff016836), fontSize: 14.0),
                           )),
                     ),
                   ),
@@ -91,7 +90,7 @@ class _perTabsState extends State<perTabs> {
                           child: new Text(
                             "Part Request Cost Report",
                             style: new TextStyle(
-                                color: const Color(0xff016836), fontSize: 20.0),
+                                color: const Color(0xff016836), fontSize: 14.0),
                           )),
                     ),
                   ),
@@ -125,7 +124,7 @@ class _perTabsState extends State<perTabs> {
                           child: new Text(
                             "Night-Out Request Cost Report",
                             style: new TextStyle(
-                                color: const Color(0xff016836), fontSize: 20.0),
+                                color: const Color(0xff016836), fontSize: 14.0),
                           )),
                     ),
                   ),
@@ -158,7 +157,7 @@ class _perTabsState extends State<perTabs> {
                           child: new Text(
                             "All",
                             style: new TextStyle(
-                                color: const Color(0xff016836), fontSize: 20.0),
+                                color: const Color(0xff016836), fontSize: 14.0),
                           )),
                     ),
                   ),

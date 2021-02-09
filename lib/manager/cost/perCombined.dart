@@ -12,6 +12,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:flutter/scheduler.dart';
 
 
 
@@ -129,10 +130,54 @@ class _perCombinedState extends State<perCombined> {
       );
     }
   }
+
+  String _cont;
+  int _contri;
+  String contString;
+  int total = 0;
+  int newTotal;
+
+  String _contP;
+  int _contriP;
+  String contStringP;
+  int totalP = 0;
+  int newTotalP;
+
+  String _contN;
+  int _contriN;
+  String contStringN;
+  int totalN = 0;
+  int newTotalN;
+
+  String _contF;
+  int _contriF;
+  String contStringF;
+  int totalF = 0;
+  int newTotalF;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+              child: Text( newTotalF != null ? 'Fuel: KSH.${contStringF}': 'waiting ...', style: TextStyle(fontSize: 10),),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+              child: Text( newTotalP != null ? 'Parts: KSH.${contStringP}': 'waiting ...', style: TextStyle(fontSize: 10),),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+              child: Text( newTotalN != null ? 'Night-Outs: KSH.${contStringN}': 'waiting ...', style: TextStyle(fontSize: 10),),
+            ),
+          ],
+        ),
+        centerTitle: true,
+        backgroundColor: const Color(0xff016836),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         label: Row(children: [
           new Icon(Icons.file_download),
@@ -399,7 +444,7 @@ class _perCombinedState extends State<perCombined> {
                             child: Column(
                               children: <Widget>[
                                 new Text(
-                                  "All Requests cost",
+                                  "All Requests",
                                   style: new TextStyle(
                                       fontSize: 12.0, fontWeight: FontWeight.w700),
                                 ),
@@ -467,6 +512,30 @@ class _perCombinedState extends State<perCombined> {
   }
 
   List<DataRow> _createRows(QuerySnapshot snapshot) {
+
+    int totF = 0;
+    int totP = 0;
+    int totN = 0;
+    snapshot.documents.forEach((document)
+    {
+      SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {
+        _contF = document['fuel'];
+        _contriF = int.parse(_contF);
+        newTotalF = totF += _contriF;
+        contStringF = newTotalF.toString();
+
+        _contP = document['part'];
+        _contriP = int.parse(_contP);
+        newTotalP = totP += _contriP;
+        contStringP = newTotalP.toString();
+
+        _contN = document['nightOut'];
+        _contriN = int.parse(_contN);
+        newTotalN = totN += _contriN;
+        contStringN = newTotalN.toString();
+      }));
+
+    });
 
     List<DataRow> newList = snapshot.documents.map((doc) {
       return new DataRow(

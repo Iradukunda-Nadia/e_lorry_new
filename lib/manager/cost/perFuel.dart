@@ -12,6 +12,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:flutter/scheduler.dart';
 
 class perFuel extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _perFuelState extends State<perFuel> {
     getStringValue();
     truckNo = 'all';
     month = 'all';
-    getTotal();
+    contString = '0';
 
   }
 
@@ -75,14 +76,14 @@ class _perFuelState extends State<perFuel> {
     rows.add(<String>['TRUCK', 'DATE', 'LITRES','REQUESTED FUEL','PER LTR', 'TOTAL (KSH.)', 'FUEL STATION', 'PAYMENT METHOD', 'RECEIPIENT', 'REQUESTED BY', 'STATUS', 'NEW READING'],);
     final QuerySnapshot result =
     truckNo == 'all' && month == 'all' ?
-    Firestore.instance.collection("fuelRequest").where('company', isEqualTo: userCompany).where('status', isEqualTo: 'Approved').orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("fuelRequest").where('company', isEqualTo: userCompany).where('comment', isEqualTo: 'Approved').orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month == 'all' ?
-    Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("fuelRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
     truckNo == 'all' && month != 'all' ?
-    Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
+    Firestore.instance.collection("fuelRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month != 'all' ?
-    Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments:
-    Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
+    Firestore.instance.collection("fuelRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments:
+    Firestore.instance.collection("fuelRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
     final List<DocumentSnapshot> documents = result.documents;
     if (documents != null) {
 //row refer to each column of a row in csv file and rows refer to each row in a file
@@ -131,41 +132,22 @@ class _perFuelState extends State<perFuel> {
       );
     }
   }
-  String fuelTotal;
+  String _cont;
+  int _contri;
+  String contString;
   int total = 0;
   int newTotal;
-  int ft;
-  String tot;
 
-  Future getTotal() async {
-    final QuerySnapshot result =
-    truckNo == 'all' && month == 'all' ?
-    await Firestore.instance.collection("fuelRequest").where('company', isEqualTo: userCompany).where('status', isEqualTo: 'Approved').orderBy('timestamp', descending: true).snapshots():
-    truckNo != 'all' && month == 'all' ?
-    await Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
-    truckNo == 'all' && month != 'all' ?
-    await Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
-    truckNo != 'all' && month != 'all' ?
-    await Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
-    await Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots();
 
-    result.documents.forEach((document)
-    {
-      setState(() {
-        tot = document['Total'];
-        newTotal = tot != ''|| null ? total += (int.parse(tot)): total;
-        fuelTotal = newTotal.toString();
-      });
-    });
-  }
+
   final formatCurrency = new NumberFormat.simpleCurrency();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(fuelTotal != null ? 'Total spent: KSH.${formatCurrency.format(fuelTotal)}': 'waiting ...', style: TextStyle(fontSize: 10),),
+        title: Text( newTotal != null ? 'Total spent: KSH.${contString}': 'waiting ...', style: TextStyle(fontSize: 10),),
         centerTitle: true,
-        backgroundColor: Colors.pink[900],
+        backgroundColor: const Color(0xff016836),
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: Row(children: [
@@ -421,6 +403,8 @@ class _perFuelState extends State<perFuel> {
                           ),
                         ],
                       )),
+
+
                   new Card(
                     child: new Container(
                       margin: new EdgeInsets.only(left: 5.0, right: 5.0),
@@ -460,16 +444,17 @@ class _perFuelState extends State<perFuel> {
                         new StreamBuilder(
                           stream:
                           truckNo == 'all' && month == 'all' ?
-                          Firestore.instance.collection("fuelRequest").where('company', isEqualTo: userCompany).where('status', isEqualTo: 'Approved').orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("fuelRequest").where('company', isEqualTo: userCompany).where('comment', isEqualTo: 'Approved').orderBy('timestamp', descending: true).snapshots():
                           truckNo != 'all' && month == 'all' ?
-                          Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("fuelRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).snapshots():
                           truckNo == 'all' && month != 'all' ?
-                          Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("fuelRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
                           truckNo != 'all' && month != 'all' ?
-                          Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
-                          Firestore.instance.collection("fuelRequest").where('status', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots(),
+                          Firestore.instance.collection("fuelRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).snapshots():
+                          Firestore.instance.collection("fuelRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).snapshots(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) return new Text('Loading...');
+
                             return new FittedBox(
                               child: DataTable(
                                 columnSpacing: 8,
@@ -503,6 +488,17 @@ class _perFuelState extends State<perFuel> {
   }
 
   List<DataRow> _createRows(QuerySnapshot snapshot) {
+    int tot = 0;
+    snapshot.documents.forEach((document)
+    {
+      SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {
+        _cont = document['Total'];
+        _contri = int.parse(_cont);
+        newTotal = tot += _contri;
+        contString = newTotal.toString();
+      }));
+
+    });
 
     List<DataRow> newList = snapshot.documents.map((doc) {
       return new DataRow(

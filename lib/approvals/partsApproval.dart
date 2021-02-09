@@ -367,8 +367,9 @@ class _ApprovalState extends State<Approval> {
         .document(widget.itemID)
         .updateData({
       'status': "Paid",
-      'comment': "Paid",
+      'comment': "Approved",
       'approved by': currentUserEmail,
+      'price': widget.amount,
     });
   }
 
