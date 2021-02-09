@@ -1245,6 +1245,8 @@ class _AppNightOutState extends State<AppNightOut> {
                                       Firestore.instance.collection('combined')
                                           .add({
                                         'nightOut': widget.total,
+                                        'company': widget.company,
+                                       'comment': 'Approved',
                                         'truck': widget.truck,
                                         "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
                                         "month" : DateFormat(' yyyy- MM').format(DateTime.now()),

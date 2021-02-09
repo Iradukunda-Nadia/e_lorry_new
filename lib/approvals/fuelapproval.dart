@@ -920,6 +920,8 @@ String userComp ;
                                           Firestore.instance.collection('combined')
                                               .add({
                                             'fuel': widget.total,
+                                            'company': userComp,
+                                            'comment': 'Approved',
                                             'truck': widget.truck,
                                             "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
                                             "month" : DateFormat(' yyyy- MM').format(DateTime.now()),

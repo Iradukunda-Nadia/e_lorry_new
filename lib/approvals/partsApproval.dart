@@ -1592,6 +1592,8 @@ class _ApprovalState extends State<Approval> {
                                               });
                                               Firestore.instance.collection('combined')
                                                   .add({
+                                                'company': userCompany,
+                                                'comment': 'Approved',
                                                 'part': widget.amount,
                                                 'truck': widget.itemNumber,
                                                 "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
