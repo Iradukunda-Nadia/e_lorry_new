@@ -75,14 +75,14 @@ class _perNOutState extends State<perNOut> {
     rows.add(<String>['Truck', 'Date','Total', ],);
     final QuerySnapshot result =
     truckNo == 'all' && month == 'all' ?
-    Firestore.instance.collection("NightOutRequest").where('company', isEqualTo: userCompany).where('comment', isEqualTo: 'Approved').orderBy('timestamp', descending: true).getDocuments():
+    await Firestore.instance.collection("NightOutRequest").where('company', isEqualTo: userCompany).where('comment', isEqualTo: 'Approved').orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month == 'all' ?
-    Firestore.instance.collection("NightOutRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
+    await Firestore.instance.collection("NightOutRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).orderBy('timestamp', descending: true).getDocuments():
     truckNo == 'all' && month != 'all' ?
-    Firestore.instance.collection("NightOutRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
+    await Firestore.instance.collection("NightOutRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
     truckNo != 'all' && month != 'all' ?
-    Firestore.instance.collection("NightOutRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments:
-    Firestore.instance.collection("NightOutRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
+    await Firestore.instance.collection("NightOutRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).where('Truck', isEqualTo: truckNo).where('month', isEqualTo: month).orderBy('timestamp', descending: true).getDocuments():
+    await Firestore.instance.collection("NightOutRequest").where('comment', isEqualTo: 'Approved').where('company', isEqualTo: userCompany).orderBy('timestamp', descending: true).getDocuments();
     final List<DocumentSnapshot> documents = result.documents;
     if (documents != null) {
 //row refer to each column of a row in csv file and rows refer to each row in a file
