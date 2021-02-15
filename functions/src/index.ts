@@ -162,9 +162,9 @@ const moment = require('moment');
 exports.sendDailyNotifications = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const now = moment();
-        const dateFormatted = now.add('days', 2).format('MM/DD/YYYY');
+        const dateFormatted = now.add('days', 2).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Next service", "==", dateFormatted)
+            .collection("posttrip").where("Dates.Next Service Date", "==", dateFormatted)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
@@ -197,9 +197,9 @@ exports.sendDailyNotifications = functions.https.onRequest((request, response) =
 exports.sendDailyNotifications1 = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const now = moment();
-        const dateFormatted1 = now.add('days', 7).format('MM/DD/YYYY');
+        const dateFormatted1 = now.add('days', 7).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Next service", "==", dateFormatted1)
+            .collection("posttrip").where("Dates.Next Service Date", "==", dateFormatted1)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
@@ -232,9 +232,9 @@ exports.sendDailyNotifications1 = functions.https.onRequest((request, response) 
 exports.sendDailyNotifications2 = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const now = moment();
-        const dateFormatted2 = now.add('days', 14).format('MM/DD/YYYY');
+        const dateFormatted2 = now.add('days', 14).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Next service", "==", dateFormatted2)
+            .collection("posttrip").where("Dates.Next Service Date", "==", dateFormatted2)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
@@ -267,9 +267,9 @@ exports.sendDailyNotifications2 = functions.https.onRequest((request, response) 
 exports.sendInspectionNotifications = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const today = moment();
-        const formattedDate = today.add('days', 2).format('MM/DD/YYYY');
+        const formattedDate = today.add('days', 2).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Inspection Expiry", "==", formattedDate)
+            .collection("posttrip").where("Dates.Insurance Date", "==", formattedDate)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
@@ -302,9 +302,9 @@ exports.sendInspectionNotifications = functions.https.onRequest((request, respon
 exports.sendInspectionNotifications1 = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const today = moment();
-        const formattedDate1 = today.add('days', 7).format('MM/DD/YYYY');
+        const formattedDate1 = today.add('days', 7).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Inspection Expiry", "==", formattedDate1)
+            .collection("posttrip").where("Dates.Insurance Date", "==", formattedDate1)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
@@ -337,9 +337,9 @@ exports.sendInspectionNotifications1 = functions.https.onRequest((request, respo
 exports.sendInspectionNotifications2 = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const today = moment();
-        const formattedDate2 = today.add('days', 14).format('MM/DD/YYYY');
+        const formattedDate2 = today.add('days', 14).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Inspection Expiry", "==", formattedDate2)
+            .collection("posttrip").where("Dates.Insurance Date", "==", formattedDate2)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
@@ -372,9 +372,9 @@ exports.sendInspectionNotifications2 = functions.https.onRequest((request, respo
 exports.sendInsuranceNotifications = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const date = moment();
-        const formatted = date.add('days', 2).format('MM/DD/YYYY');
+        const formatted = date.add('days', 2).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Insurance Expiry", "==", formatted)
+            .collection("posttrip").where("Dates.Insurance Expiry", "==", formatted)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
@@ -407,9 +407,9 @@ exports.sendInsuranceNotifications = functions.https.onRequest((request, respons
 exports.sendInsuranceNotifications1 = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const date = moment();
-        const formatted1 = date.add('days', 7).format('MM/DD/YYYY');
+        const formatted1 = date.add('days', 7).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Insurance Expiry", "==", formatted1)
+            .collection("posttrip").where("Dates.Insurance Expiry", "==", formatted1)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
@@ -442,9 +442,9 @@ exports.sendInsuranceNotifications1 = functions.https.onRequest((request, respon
 exports.sendInsuranceNotifications2 = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         const date = moment();
-        const formatted2 = date.add('days', 14).format('MM/DD/YYYY');
+        const formatted2 = date.add('days', 14).format('YYYY-MM-DD');
         admin.firestore()
-            .collection("service").where("Insurance Expiry", "==", formatted2)
+            .collection("posttrip").where("Dates.Insurance Expiry", "==", formatted2)
             .get()
             .then(function (querySnapshot) {
             const promises:any[] = [];
