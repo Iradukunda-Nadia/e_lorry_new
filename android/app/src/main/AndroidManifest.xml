@@ -45,6 +45,9 @@
         <meta-data
             android:name="com.hover.ApiKey"
             android:value = "5258c8b4991d79b589eb2a304f06b0ea"/>
+        <meta-data
+            android:name="co.zisky.ApiKey"
+            android:value="602ab606e805bd608af775b9"/>
 
     </application>
 </manifest>

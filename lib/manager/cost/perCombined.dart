@@ -30,6 +30,9 @@ class _perCombinedState extends State<perCombined> {
     getStringValue();
     truckNo = 'all';
     month = 'all';
+    contStringF = '0';
+    contStringP = '0';
+    contStringN = '0';
 
   }
 
@@ -171,7 +174,7 @@ class _perCombinedState extends State<perCombined> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-              child: Text( newTotalN != null ? 'Night-Outs: KSH.${contStringN}': 'waiting ...', style: TextStyle(fontSize: 10),),
+              child: Text( newTotalN != null ? 'Night-Outs: KSH.${contStringN}': '...', style: TextStyle(fontSize: 10),),
             ),
           ],
         ),
@@ -520,17 +523,17 @@ class _perCombinedState extends State<perCombined> {
     {
       SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {
         _contF = document['fuel'];
-        _contriF = int.parse(_contF);
+        _contF == null ? _contriF = int.parse('0') : _contriF = int.parse(_contF);
         newTotalF = totF += _contriF;
         contStringF = newTotalF.toString();
 
-        _contP = document['part'];
-        _contriP = int.parse(_contP);
+        _contP = document['part'] ;
+        _contP == null ? _contriP =  int.parse('0') : _contriP =  int.parse(_contP);
         newTotalP = totP += _contriP;
         contStringP = newTotalP.toString();
 
-        _contN = document['nightOut'];
-        _contriN = int.parse(_contN);
+        _contN = document['nightOut']  == null || document['nightOut'] == '' ? "0": document['nightOut'];
+        _contN == null ? _contriN =  int.parse('0') : _contriN =  int.parse(_contN);
         newTotalN = totN += _contriN;
         contStringN = newTotalN.toString();
       }));

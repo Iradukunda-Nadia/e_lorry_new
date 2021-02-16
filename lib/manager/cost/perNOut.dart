@@ -27,6 +27,7 @@ class _perNOutState extends State<perNOut> {
     getStringValue();
     truckNo = 'all';
     month = 'all';
+    contString = '0';
 
   }
 
@@ -404,7 +405,7 @@ class _perNOutState extends State<perNOut> {
                             child: Column(
                               children: <Widget>[
                                 new Text(
-                                  "Parts Request cost",
+                                  "Night-out Request cost",
                                   style: new TextStyle(
                                       fontSize: 12.0, fontWeight: FontWeight.w700),
                                 ),
@@ -474,7 +475,7 @@ class _perNOutState extends State<perNOut> {
     snapshot.documents.forEach((document)
     {
       SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {
-        _cont = document['Total'];
+        _cont = document['total'];
         _contri = int.parse(_cont);
         newTotal = tot += _contri;
         contString = newTotal.toString();

@@ -193,6 +193,16 @@ class _partsState extends State<parts> {
                               receivedBy: doc.data['Received by'],
                               img : doc.data['image'],
                               userComp: doc.data['company'],
+                              payType: doc.data["paymentType"],
+                              acc: doc.data['accNo'],
+                              recepient: doc.data["Receipent"],
+                              amount : doc.data['amount'],
+                              payMethod: doc.data['payMethod'],
+                              till: doc.data['Till'],
+                              token: doc.data['token'],
+                              vat1: doc.data["1VAT"],
+                              vat2: doc.data["2VAT"],
+                              vat3: doc.data["3VAT"],
 
 
                             )));
@@ -973,11 +983,31 @@ class reqDetail extends StatefulWidget {
   String receivedBy;
   String img;
   String userComp;
+  String payType;
+  String payMethod;
+  String till;
+  String token;
+  String acc;
+  String recepient;
+  String amount;
+  String vat1;
+  String vat2;
+  String vat3;
 
   reqDetail({
     this.receivedBy,
     this.img,
     this.userComp,
+    this.payType,
+    this.acc,
+    this.amount,
+    this.recepient,
+    this.payMethod,
+    this.till,
+    this.token,
+    this.vat1,
+    this.vat2,
+    this.vat3,
 
     this.reqStatus,
     this.approvedPrice,
@@ -1000,6 +1030,7 @@ class reqDetail extends StatefulWidget {
     this.reqSupplier,
     this.approvedQuote,
     this.sample,
+
 
   });
   @override
@@ -1168,159 +1199,369 @@ class _reqDetailState extends State<reqDetail> {
                           height: 5.0,
                         ),
 
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
+                        widget.payType == 'Credit'? Column(
+                          children: [
                             new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                new SizedBox(
-                                  width: 5.0,
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "1st Quote",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
                                 ),
                                 new Text(
-                                  "1st Quote",
-                                  style: new TextStyle(color: Colors.black, fontSize: 18.0,),
-                                )
+                                  widget.reqOne,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
-                            new Text(
-                              widget.reqOne,
-                              style: new TextStyle(
-                                  fontSize: 11.0,
-                                  color: Colors.indigo,
-                                  fontWeight: FontWeight.w700),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "Supplier",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.brand1,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "Including VAT?",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.vat1,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                            new SizedBox(
+                              height: 5.0,
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "2nd Quote",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.reqTwo,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "Supplier",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.brand2,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "including VAT?",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.vat2,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                            new SizedBox(
+                              height: 5.0,
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "3rd Quote",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.reqThree,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "Supplier",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.brand3,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "Including VAT?",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.vat3,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
+                        ):
+                        Column (
+                          children: [
                             new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                new SizedBox(
-                                  width: 5.0,
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "Total",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
                                 ),
                                 new Text(
-                                  "Brand",
-                                  style: new TextStyle(color: Colors.black, fontSize: 18.0,),
-                                )
+                                  widget.amount,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
-                            new Text(
-                              widget.brand1,
-                              style: new TextStyle(
-                                  fontSize: 11.0,
-                                  color: Colors.indigo,
-                                  fontWeight: FontWeight.w700),
+                            new SizedBox(
+                              height: 5.0,
+                            ),
+
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      'Payment Method',
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.payMethod,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "${widget.payMethod} no.",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.till,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            widget.payMethod == 'phone'? new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "Recepient",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.recepient,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ): new Offstage(),
+                            widget.payMethod == 'Paybill'? new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    new Text(
+                                      "Account No",
+                                      style: new TextStyle(color: Colors.black, fontSize: 18.0,),
+                                    )
+                                  ],
+                                ),
+                                new Text(
+                                  widget.acc,
+                                  style: new TextStyle(
+                                      fontSize: 11.0,
+                                      color: Colors.indigo,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ): new Offstage(),
+
+                            new SizedBox(
+                              height: 5.0,
                             ),
                           ],
                         ),
 
                         new SizedBox(
-                          height: 5.0,
-                        ),
-
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                new SizedBox(
-                                  width: 5.0,
-                                ),
-                                new Text(
-                                  "2nd Quote",
-                                  style: new TextStyle(color: Colors.black, fontSize: 18.0,),
-                                )
-                              ],
-                            ),
-                            new Text(
-                              widget.reqTwo,
-                              style: new TextStyle(
-                                  fontSize: 11.0,
-                                  color: Colors.indigo,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                new SizedBox(
-                                  width: 5.0,
-                                ),
-                                new Text(
-                                  "Brand",
-                                  style: new TextStyle(color: Colors.black, fontSize: 18.0,),
-                                )
-                              ],
-                            ),
-                            new Text(
-                              widget.brand2,
-                              style: new TextStyle(
-                                  fontSize: 11.0,
-                                  color: Colors.indigo,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-
-                        new SizedBox(
-                          height: 5.0,
-                        ),
-
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                new SizedBox(
-                                  width: 5.0,
-                                ),
-                                new Text(
-                                  "3rd Quote",
-                                  style: new TextStyle(color: Colors.black, fontSize: 18.0,),
-                                )
-                              ],
-                            ),
-                            new Text(
-                              widget.reqThree,
-                              style: new TextStyle(
-                                  fontSize: 11.0,
-                                  color: Colors.indigo,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                new SizedBox(
-                                  width: 5.0,
-                                ),
-                                new Text(
-                                  "Brand",
-                                  style: new TextStyle(color: Colors.black, fontSize: 18.0,),
-                                )
-                              ],
-                            ),
-                            new Text(
-                              widget.brand3,
-                              style: new TextStyle(
-                                  fontSize: 11.0,
-                                  color: Colors.indigo,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ],
+                          height: 10.0,
                         ),
 
 
@@ -1543,6 +1784,8 @@ class _reqDetailState extends State<reqDetail> {
                             ],
                           ),
                         ),
+
+
                         GestureDetector(
                           onTap: () async {
                             await showDialog(

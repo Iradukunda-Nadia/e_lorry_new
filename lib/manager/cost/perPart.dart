@@ -27,6 +27,7 @@ class _pertPartState extends State<pertPart> {
     getStringValue();
     truckNo = 'all';
     month = 'all';
+    contString = '0';
 
   }
 
@@ -451,7 +452,7 @@ class _pertPartState extends State<pertPart> {
                                   new DataColumn(label: Text('DATE',style: new TextStyle(fontSize: 8.0, fontWeight: FontWeight.bold),)),
                                   new DataColumn(label: Text('TRUCK',style: new TextStyle(fontSize: 8.0, fontWeight: FontWeight.bold),)),
                                   new DataColumn(label: Text('PART\nREQUESTED',style: new TextStyle(fontSize: 8.0, fontWeight: FontWeight.bold),)),
-                                  new DataColumn(label: Text('Quantity',style: new TextStyle(fontSize: 8.0, fontWeight: FontWeight.bold),)),
+                                  new DataColumn(label: Text('QUANTITY',style: new TextStyle(fontSize: 8.0, fontWeight: FontWeight.bold),)),
                                   new DataColumn(label: Text('TOTAL\n(KSH.)',style: new TextStyle(fontSize: 8.0, fontWeight: FontWeight.bold),)),
                                 ],
                                 rows: _createRows(snapshot.data),
@@ -480,8 +481,8 @@ class _pertPartState extends State<pertPart> {
     snapshot.documents.forEach((document)
     {
       SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {
-        _cont = document['price'];
-        _contri = int.parse(_cont);
+        _cont = document["price"];
+        _cont == null ? _contri =  int.parse('0') : _contri =  int.parse(_cont);
         newTotal = tot += _contri;
         contString = newTotal.toString();
       }));
