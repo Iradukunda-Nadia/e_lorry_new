@@ -31,6 +31,7 @@ Future<void> main() async {
   runApp(OverlaySupport(
     child: MaterialApp(
         title: 'E-lorry',
+
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
