@@ -299,7 +299,7 @@ class _noRequestState extends State<noRequest> {
         "driver": driver,
         "driverPhone": number,
         "route": route,
-        "contract": contract,
+        "contract": '...',
         "drops": drops,
 
         "travelR": travelR,
@@ -515,7 +515,7 @@ class _noRequestState extends State<noRequest> {
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                 child: Container(
                   child: TextFormField(
-                    textCapitalization: TextCapitalization.sentences,
+                    keyboardType: TextInputType.phone,
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'SFUIDisplay'
@@ -525,7 +525,7 @@ class _noRequestState extends State<noRequest> {
                         errorStyle: TextStyle(color: Colors.red),
                         filled: true,
                         fillColor: Colors.white.withOpacity(0.1),
-                        labelText: 'Driver Number',
+                        labelText: 'Driver Phone Number',
                         labelStyle: TextStyle(
                             fontSize: 11
                         )
@@ -537,31 +537,7 @@ class _noRequestState extends State<noRequest> {
                 ),
               ),
 
-              Padding(
-                padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                child: Container(
-                  child: TextFormField(
-                    textCapitalization: TextCapitalization.sentences,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'SFUIDisplay'
-                    ),
-                    decoration: InputDecoration(
 
-                        errorStyle: TextStyle(color: Colors.red),
-                        filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
-                        labelText: 'Contract (Specifics)',
-                        labelStyle: TextStyle(
-                            fontSize: 11
-                        )
-                    ),
-                    validator: (val) =>
-                    val.isEmpty  ? 'Field cannot be empty' : null,
-                    onSaved: (val) => contract = val,
-                  ),
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                 child: Container(

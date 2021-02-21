@@ -481,8 +481,8 @@ class _partRequestState extends State<partRequest> {
                         value: 'Cash',child: Text('Cash'),),
 
                     ],
+                    validators: [FormBuilderValidators.required()],
                     onSaved: (val) => payMethod = val,
-
                     onChanged: (val){
                       setState(() {
 
@@ -585,6 +585,7 @@ class _partRequestState extends State<partRequest> {
                                   value: 'No',
                                   child: Text('No'),),
                               ],
+                              validators: [FormBuilderValidators.required()],
                               onSaved: (val) => fVAT = val,
                             ),
                           ),
@@ -672,6 +673,7 @@ class _partRequestState extends State<partRequest> {
                                   value: 'No',
                                   child: Text('No'),),
                               ],
+                              validators: [FormBuilderValidators.required()],
                               onSaved: (val) => sVAT = val,
                             ),
                           ),
@@ -759,6 +761,7 @@ class _partRequestState extends State<partRequest> {
                                   value: 'No',
                                   child: Text('No'),),
                               ],
+                              validators: [FormBuilderValidators.required()],
                               onSaved: (val) => tVAT = val,
                             ),
                           ),
@@ -816,6 +819,7 @@ class _partRequestState extends State<partRequest> {
                             value: 'Phone',
                             child: Text('Phone'),),
                         ],
+                        validators: [FormBuilderValidators.required()],
                         onSaved: (val) => phone = val,
                         onChanged: (val){
                           setState(() {
@@ -877,6 +881,7 @@ class _partRequestState extends State<partRequest> {
                       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                       child: Container(
                         child: TextFormField(
+                          keyboardType: TextInputType.phone,
                           textCapitalization: TextCapitalization.sentences,
                           style: TextStyle(
                               color: Colors.black,
