@@ -100,22 +100,10 @@ class _NightOutState extends State<NightOut> {
                   itemBuilder: (context, index) {
                     var doc = snapshot.data.documents[index];
                     return Container(
-                      decoration: doc.data['status'] == 'Approved' ? BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.green,
-                              spreadRadius: 4,
-                              blurRadius: 10,
-                              offset: Offset(0, 0),
-                            ),
-                            BoxShadow(
-                              color: Colors.green,
-                              spreadRadius: -4,
-                              blurRadius: 5,
-                              offset: Offset(0, 0),
-                            )
-                          ]): BoxDecoration(),
+
                       child: Card(
+                        elevation: 4,
+                        shadowColor: doc.data['status'] == 'Approved' ? Colors.green : Colors.black12,
                         child: ListTile(
                           subtitle: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -232,6 +220,7 @@ class noRequest extends StatefulWidget {
 
 class _noRequestState extends State<noRequest> {
   final formKey = GlobalKey<FormState>();
+  bool isEnabled;
   String Item;
   String contract;
   String driver;
@@ -282,7 +271,7 @@ class _noRequestState extends State<noRequest> {
 
     if (form.validate()) {
       form.save();
-
+      isEnabled = false;
       _loginCommand();
     }
   }
@@ -299,7 +288,7 @@ class _noRequestState extends State<noRequest> {
         "driver": driver,
         "driverPhone": number,
         "route": route,
-        "contract": contract,
+        "contract": '...',
         "drops": drops,
 
         "travelR": travelR,
@@ -370,12 +359,14 @@ class _noRequestState extends State<noRequest> {
               child: new Text("close"),
               onPressed: () {
                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
             ),
           ],
         );
       },
     );
+    isEnabled = true;
   }
 
 
@@ -410,6 +401,8 @@ class _noRequestState extends State<noRequest> {
 
     fuelR = '0';
     fuelN ='0';
+
+    isEnabled = true;
 
 
   }
@@ -515,6 +508,7 @@ class _noRequestState extends State<noRequest> {
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                 child: Container(
                   child: TextFormField(
+                    keyboardType: TextInputType.phone,
                     textCapitalization: TextCapitalization.sentences,
                     style: TextStyle(
                         color: Colors.black,
@@ -525,7 +519,7 @@ class _noRequestState extends State<noRequest> {
                         errorStyle: TextStyle(color: Colors.red),
                         filled: true,
                         fillColor: Colors.white.withOpacity(0.1),
-                        labelText: 'Driver Number',
+                        labelText: 'Driver Phone Number',
                         labelStyle: TextStyle(
                             fontSize: 11
                         )
@@ -537,31 +531,7 @@ class _noRequestState extends State<noRequest> {
                 ),
               ),
 
-              Padding(
-                padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                child: Container(
-                  child: TextFormField(
-                    textCapitalization: TextCapitalization.sentences,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'SFUIDisplay'
-                    ),
-                    decoration: InputDecoration(
 
-                        errorStyle: TextStyle(color: Colors.red),
-                        filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
-                        labelText: 'Contract (Specifics)',
-                        labelStyle: TextStyle(
-                            fontSize: 11
-                        )
-                    ),
-                    validator: (val) =>
-                    val.isEmpty  ? 'Field cannot be empty' : null,
-                    onSaved: (val) => contract = val,
-                  ),
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                 child: Container(
@@ -1865,19 +1835,19 @@ class _noRequestState extends State<noRequest> {
               Padding(
                 padding: EdgeInsets.fromLTRB(70, 10, 70, 0),
                 child: MaterialButton(
-                  onPressed: (){_submitCommand();},
-                  child: Text('Submit',
+                  onPressed: (){isEnabled == true ? _submitCommand() : null ; },
+                  child: Text(isEnabled == true ? 'Submit': 'Submiting...',
                     style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'SFUIDisplay',
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  color: Colors.white,
+                  color: isEnabled == false ? Colors.white: Colors.red[900],
                   elevation: 16.0,
                   minWidth: 400,
                   height: 50,
-                  textColor: Colors.red,
+                  textColor: isEnabled == false ? Colors.red: Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)
                   ),

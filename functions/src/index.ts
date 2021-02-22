@@ -41,6 +41,23 @@ export const sendToDevice = functions.firestore
     return fcm.sendToDevice(tokens, payload);
   });
 
+export const sendPostTrip = functions.firestore
+  .document('posttrip/{Item}')
+  .onCreate(async snapshot => {
+  let truck = snapshot.get('Truck');
+  let comp = snapshot.get('company');
+  let pTTopic = `all${comp}`;
+
+    const message: admin.messaging.MessagingPayload = {
+      notification: {
+        title: truck,
+        body: 'New Post trip Evaluation Completed',
+      }
+    };
+
+    return fcm.sendToTopic(pTTopic, message);
+  });
+
 
 
 export const sendToTopic = functions.firestore

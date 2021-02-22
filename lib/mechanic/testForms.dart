@@ -509,7 +509,7 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
         "Cabin": _caKey.currentState.value,
         "Body": _boKey.currentState.value,
         "Safety": _saKey.currentState.value,
-        "Wheels": _wKey.currentState.value,
+        "Wheels": '',
         "Other": _oKey.currentState.value,
         "Dates": _daKey.currentState.value,
         "Comment": _coKey.currentState.value,
@@ -550,7 +550,6 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
     _caKey.currentState.reset();
     _boKey.currentState.reset();
     _saKey.currentState.reset();
-    _wKey.currentState.reset();
     _oKey.currentState.reset();
     _daKey.currentState.reset();
     _coKey.currentState.reset();
@@ -563,26 +562,11 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
           onWillPop: () async => false,
           child: AlertDialog(
             title: new Text("Your data has been saved"),
-            content: new Text("Do you want to Request any Material?"),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
-              new FlatButton(
-                child: new Text("YES"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(new CupertinoPageRoute(
-                      builder: (BuildContext context) => new  matRequest(
-                        truckNo: widget.truckNumber,
-                        driverName: widget.driverName,
-                        truckType: widget.truckType,
 
-                      )
-                  )
-                  );
-                },
-              ),
               new FlatButton(
-                child: new Text("NO"),
+                child: new Text("OK"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -1546,7 +1530,15 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         children: <Widget>[
+                                          new SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          new Text("Dates",
+                                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey),),
 
+                                          new SizedBox(
+                                            height: 10.0,
+                                          ),
                                           new FutureBuilder(
                                             future: getdates(),
                                             builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -1558,45 +1550,28 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
                                               }
                                               else {
                                                 return Center(
-                                                  child: Column(
-                                                    children: [
-                                                      new SizedBox(
-                                                        height: 10.0,
-                                                      ),
-                                                      new Text("Dates",
-                                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey),),
+                                                  child: ListView.builder(
+                                                      padding: const EdgeInsets.only(bottom: 20.0),
+                                                      scrollDirection: Axis.vertical,
+                                                      physics: const NeverScrollableScrollPhysics(),
+                                                      shrinkWrap: true,
+                                                      itemCount: snapshot.data.length,
+                                                      itemBuilder: (context, index) {
 
-                                                      new SizedBox(
-                                                        height: 10.0,
-                                                      ),
-                                                  FormBuilderDateTimePicker(
-                                                    initialEntryMode: DatePickerEntryMode.calendar,
-                                                    attribute: 'Inspection Date',
-                                                    inputType: InputType.date,
-                                                    format: DateFormat("yyyy-MM-dd"),firstDate: DateTime.now(),
-                                                    valueTransformer: (value) {
-                                                      return value.toString().substring(0,10);
-                                                    },
-                                                    validators: [FormBuilderValidators.required()],
-                                                    decoration:
-                                                    InputDecoration(labelText: 'Inspection Date'),
-                                                    onSaved: (val) => inspection = DateFormat('MM/DD/YYYY').format(val),
-                                                  ),
-                                                      FormBuilderDateTimePicker(
-                                                        initialEntryMode: DatePickerEntryMode.calendar,
-                                                        attribute: 'Insurance Expiry',
-                                                        inputType: InputType.date,
-                                                        format: DateFormat("yyyy-MM-dd"),firstDate: DateTime.now(),
-                                                        valueTransformer: (value) {
-                                                          return value.toString().substring(0,10);
-                                                        },
-                                                        validators: [FormBuilderValidators.required()],
-                                                        decoration:
-                                                        InputDecoration(labelText: 'Insurance Expiry'),
-                                                        onSaved: (val) => insurance = DateFormat('MM/DD/YYYY').format(val),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                        return FormBuilderDateTimePicker(
+                                                          initialEntryMode: DatePickerEntryMode.calendar,
+                                                          attribute: snapshot.data[index],
+                                                          inputType: InputType.date,
+                                                          format: DateFormat("yyyy-MM-dd"),firstDate: DateTime.now(),
+                                                          valueTransformer: (value) {
+                                                            return value.toString().substring(0,10);
+                                                          },
+                                                          validators: [FormBuilderValidators.required()],
+                                                          decoration:
+                                                          InputDecoration(labelText: snapshot.data[index]),
+                                                        );
+
+                                                      }),
                                                 );
                                               }
                                             },
@@ -1609,7 +1584,6 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
                               ],
                             ),
                           ),
-
 
                           Card(
                             child: new Padding(
@@ -1646,7 +1620,6 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
                             _caKey.currentState.save();
                             _boKey.currentState.save();
                             _saKey.currentState.save();
-                            _wKey.currentState.save();
                             _oKey.currentState.save();
                             _daKey.currentState.save();
                             _coKey.currentState.save();
@@ -1661,7 +1634,6 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
                                 _caKey.currentState.validate()&&
                                 _boKey.currentState.validate()&&
                                 _saKey.currentState.validate()&&
-                                _wKey.currentState.validate()&&
                                 _oKey.currentState.validate()&&
                                 _coKey.currentState.validate()&&
                                 _daKey.currentState.validate()) {
@@ -1689,7 +1661,6 @@ class _TestFormsState extends State<TestForms> with SingleTickerProviderStateMix
                             _caKey.currentState.reset();
                             _boKey.currentState.reset();
                             _saKey.currentState.reset();
-                            _wKey.currentState.reset();
                             _oKey.currentState.reset();
                             _daKey.currentState.reset();
                             _coKey.currentState.reset();
