@@ -1,3 +1,5 @@
+import 'package:e_lorry/approvals/fuelapproval.dart';
+import 'package:e_lorry/approvals/nighoutApproval.dart';
 import 'package:e_lorry/manager/manager.dart';
 import 'package:e_lorry/mechanic/vehicle.dart';
 import 'package:e_lorry/user/user.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
+import 'approvals/partsApproval.dart';
 import 'login.dart';
 import 'mechanic/mech.dart';
 
@@ -21,18 +24,14 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HoverUssd().initialize();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  const PLAY_STORE_URL =
-      'https://play.google.com/store/apps/details?id=com.nadia.e_lorry';
-
-
-
+  String _test;
 
   var email = prefs.getString('userID');
   print(email);
   runApp(OverlaySupport(
     child: MaterialApp(
         title: 'E-lorry',
+
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
@@ -42,7 +41,10 @@ Future<void> main() async {
           '/LoginScreen': (BuildContext context) => new LoginScreen(),
           '/ManagerScreen': (BuildContext context) => new Manager(),
           '/UserScreen': (BuildContext context) => new User(),
-          '/MechanicScreen': (BuildContext context) => new vehicleService()
+          '/MechanicScreen': (BuildContext context) => new vehicleService(),
+          '/FuelApproval': (BuildContext context) => new FuelApproval(),
+          '/NightOutApproval': (BuildContext context) => new noApproval(),
+          '/PartsApproval': (BuildContext context) => new partsApproval()
         },
         home: email == null ? LoginScreen() : Logged(userID: email,)),
   ));
