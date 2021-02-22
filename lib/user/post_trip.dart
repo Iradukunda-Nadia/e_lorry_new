@@ -189,7 +189,6 @@ class _PostDatesState extends State<PostDates> {
                               cabin: Map<String, dynamic>.from(doc.data["Cabin"]),
                               body: Map<String, dynamic>.from(doc.data["Body"]),
                               safety: Map<String, dynamic>.from(doc.data["Safety"]),
-                              wheels: Map<String, dynamic>.from(doc.data["Wheels"]),
                               other: Map<String, dynamic>.from(doc.data["Other"]),
 
 

@@ -911,7 +911,7 @@ class _genPOSTState extends State<genPOST> {
     List<DataRow> newList = snapshot.documents.map((doc) {
       return new DataRow(
           cells: [
-            DataCell(Text(doc.data["timestamp"],
+            DataCell(Text( doc.data ["date"],
               style: new TextStyle(fontSize: 8.0),)),
             DataCell(Text(doc.data["Truck"],
               style: new TextStyle(fontSize: 8.0),)),

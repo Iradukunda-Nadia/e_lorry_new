@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
               _messaging.subscribeToTopic('puppies${document['company']}');
               _messaging.subscribeToTopic('all${document['company']}');
               Navigator.of(context).pushReplacement(new CupertinoPageRoute(
-                  builder: (BuildContext context) => new Requisition(use: 'mech',)
+                  builder: (BuildContext context) => new Requisition()
               ));
 
             }
