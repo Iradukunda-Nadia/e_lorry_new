@@ -320,7 +320,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "20cd600dd59015fa1a1b6ee770a06c0e32fc7551"
+      resolved-ref: "41c4f18cc5a9c7d4bdf4ee7189e4901f7d769e7b"
       url: "https://github.com/Iradukunda-Nadia/hover_ussd"
     source: git
     version: "0.0.2+2"
