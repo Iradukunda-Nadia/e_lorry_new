@@ -31,19 +31,7 @@ class _testPayState extends State<testPay> {
                 },
                 child: Text("Start Transaction"),
               ),
-              StreamBuilder(
-                stream: _hoverUssd.onTransactiontateChanged,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.data == TransactionState.succesfull) {
-                    return Text("succesfull");
-                  } else if (snapshot.data == TransactionState.waiting) {
-                    return Text("pending");
-                  } else if (snapshot.data == TransactionState.failed) {
-                    return Text("failed");
-                  }
-                  return Text("no transaction");
-                },
-              ),
+
             ],
           ),
         ),

@@ -215,9 +215,6 @@ class _ItemsState extends State<Items> {
                               cessR: doc.data["cessR"],
                               cessN: doc.data["cessN"],
                               cessT: doc.data["cessT"],
-                              fuelR: doc.data["fuelR"],
-                              fuelN: doc.data["fuelN"],
-                              fuelT: doc.data["fuelT"],
 
                               date: doc.data["date"],
                               status: doc.data["status"],
@@ -1006,60 +1003,6 @@ class _AppNightOutState extends State<AppNightOut> {
                                       child: ListTile(
                                         title: Text('Total', style: TextStyle( fontSize: 12),),
                                         subtitle: Text(widget.cessT , style: TextStyle(fontSize: 10 ),),
-                                      ),
-                                    )
-                                    //container
-                                  ],
-                                ))
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        ),
-
-                      ),
-                      Divider(),
-
-                      ListTile(
-                        title: Text('Provision for Top-Up Fuel', style: TextStyle(
-                            fontSize: 10
-                        )),
-                        subtitle: Row(
-                          children: <Widget>[
-                            Flexible(
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      child: ListTile(
-                                        title: Text('Rate', style: TextStyle(
-                                            fontSize: 12
-                                        ),),
-                                        subtitle: Text(widget.fuelR , style: TextStyle(
-                                            fontSize: 10
-                                        ),),
-                                      ),
-                                    )
-                                    //container
-                                  ],
-                                )
-                            ),
-                            Flexible(
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      child: ListTile(
-                                        title: Text('No. Of Night-Outs', style: TextStyle( fontSize: 12),),
-                                        subtitle: Text(widget.fuelN , style: TextStyle(fontSize: 10 ),),
-                                      ),
-                                    )
-                                    //container
-                                  ],
-                                )),
-                            Flexible(
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      child: ListTile(
-                                        title: Text('Total', style: TextStyle( fontSize: 12),),
-                                        subtitle: Text(widget.fuelT , style: TextStyle(fontSize: 10 ),),
                                       ),
                                     )
                                     //container

@@ -481,6 +481,7 @@ class _fuelFormState extends State<fuelForm> {
                         FormBuilderFieldOption(
                           value: 'No',child: Text('No'),),
                       ],
+                      validators: [FormBuilderValidators.required()],
                       onSaved: (val) => lalji = val,
                       onChanged: (val){
                         setState(() {
@@ -550,6 +551,7 @@ class _fuelFormState extends State<fuelForm> {
                               value: 'Phone',
                               child: Text('Phone'),),
                           ],
+                          validators: [FormBuilderValidators.required()],
                           onSaved: (val) => phone = val,
                           onChanged: (val){
                             setState(() {
@@ -583,7 +585,7 @@ class _fuelFormState extends State<fuelForm> {
                         padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                         child: Container(
                           child: TextFormField(
-                            textCapitalization: TextCapitalization.sentences,
+                            keyboardType: TextInputType.phone,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'SFUIDisplay'

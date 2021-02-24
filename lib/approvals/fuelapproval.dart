@@ -344,6 +344,7 @@ String userComp ;
     }
   }
 
+
   _updateData() async {
     await Firestore.instance
         .collection('fuelRequest')
@@ -1006,21 +1007,7 @@ String userComp ;
                     ),
                   ),
                 ): new Offstage(),
-              StreamBuilder(
-                stream: _hoverUssd.onTransactiontateChanged,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.data == TransactionState.succesfull) {
-                    return Text("success");
-                  } else if (snapshot.data == TransactionState.waiting) {
-                    return Text("processing");
-                  } else if (snapshot.data == TransactionState.failed) {
-                    return Text("failed");
 
-
-                  }
-                  return Text("no transaction");
-                },
-              ),
                 new SizedBox(
                   height: 5.0,
                 ),

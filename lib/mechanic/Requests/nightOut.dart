@@ -326,9 +326,6 @@ class _noRequestState extends State<noRequest> {
         'cessR': cessR,
         'cessN': cessN,
         'cessT': cessT.text,
-        'fuelR': fuelR,
-        'fuelN': fuelN,
-        'fuelT': fuelT.text,
         "date" : DateFormat(' yyyy- MM - dd').format(DateTime.now()),
         "month" : DateFormat(' yyyy- MM').format(DateTime.now()),
         'timestamp': DateTime.now(),
@@ -343,10 +340,8 @@ class _noRequestState extends State<noRequest> {
                 int.parse(emptyT.text)+
                 int.parse(hireT.text)+
                 int.parse(boatT.text)+
-                int.parse(fuelT.text)+
                 int.parse(offLoadT.text)+
-                int.parse(cessT.text)+
-                int.parse(fuelT.text)).toString(),
+                int.parse(cessT.text)).toString(),
       });
     }).then((result) =>
 
@@ -1678,141 +1673,7 @@ class _noRequestState extends State<noRequest> {
               ),
               Divider(),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: ListTile(
-                  title: Text('Provision for Top-Up Fuel', style: TextStyle(
-                      fontSize: 10
-                  )),
-                  subtitle: Row(
-                    children: <Widget>[
-                      Flexible(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(5.0,0.0,5.0,5.0),
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.numberWithOptions(decimal: false),
-                                    textCapitalization: TextCapitalization.sentences,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'SFUIDisplay'
-                                    ),
-                                    decoration: InputDecoration(
 
-                                        errorStyle: TextStyle(color: Colors.red),
-                                        filled: true,
-                                        fillColor: Colors.white.withOpacity(0.1),
-                                        labelText: 'Rate',
-                                        labelStyle: TextStyle(
-                                            fontSize: 8
-                                        )
-                                    ),
-                                    onSaved: (val) => fuelR = val,
-                                    onChanged: (val){
-                                      setState(() {
-                                        fuelR = val;
-                                      });
-                                      if (val == '' || val == null){
-                                        setState(() {
-                                          fuelR = '0';
-                                        });
-                                      }
-                                    },
-
-                                  ),
-                                ),
-                              )
-                              //container
-                            ],
-                          )
-                      ),
-                      Flexible(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(5.0,0.0,5.0,5.0),
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.numberWithOptions(decimal: false),
-                                    textCapitalization: TextCapitalization.sentences,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'SFUIDisplay'
-                                    ),
-                                    decoration: InputDecoration(
-                                        errorStyle: TextStyle(color: Colors.red),
-                                        filled: true,
-                                        fillColor: Colors.white.withOpacity(0.1),
-                                        labelText: 'No. Of Night-Outs',
-                                        labelStyle: TextStyle(
-                                            fontSize: 8
-                                        )
-                                    ),
-                                    onSaved: (val) => fuelN = val,
-                                    onChanged: (val){
-                                      setState(() {
-                                        fuelN = val;
-                                      });
-                                      if (val == '' || val == null){
-                                        setState(() {
-                                          fuelN = '0';
-                                        });
-                                      }
-                                    },
-                                  ),
-                                ),
-                              )
-                              //container
-                            ],
-                          )),
-                      Flexible(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(5.0,0.0,5.0,5.0),
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.numberWithOptions(decimal: false),
-                                    textCapitalization: TextCapitalization.sentences,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'SFUIDisplay'
-                                    ),
-                                    controller: fuelT,
-                                    readOnly: true,
-                                    enabled: false,
-                                    decoration: InputDecoration(
-                                        errorStyle: TextStyle(color: Colors.red),
-                                        filled: true,
-                                        fillColor: Colors.white.withOpacity(0.1),
-                                        labelText: 'Total',
-                                        labelStyle: TextStyle(
-                                            fontSize: 8
-                                        )
-                                    ),
-                                    validator: (val) =>
-                                    val.isEmpty  ? 'Field cannot be empty' : null,
-                                    onSaved: (val) => fuelT.text = val,
-                                    onChanged: (val){
-                                      setState(() {
-                                        fuelT.text = val;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              )
-                              //container
-                            ],
-                          ))
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  ),
-
-                ),
-              ),
-              Divider(),
 
               Padding(
                 padding: const EdgeInsets.only(top: 5.0),
@@ -1828,8 +1689,7 @@ class _noRequestState extends State<noRequest> {
                           int.parse(boatT.text)+
                           int.parse(ferryT.text)+
                           int.parse(offLoadT.text)+
-                          int.parse(cessT.text)+
-                          int.parse(fuelT.text)
+                          int.parse(cessT.text)
                   ).toString(), style: TextStyle(
                       fontSize: 14, fontWeight: FontWeight.bold
                   )),
@@ -2603,59 +2463,7 @@ class _noDetailState extends State<noDetail> {
                             ),
                             Divider(),
 
-                            ListTile(
-                              title: Text('Provision for Top-Up Fuel', style: TextStyle(
-                                  fontSize: 10
-                              )),
-                              subtitle: Row(
-                                children: <Widget>[
-                                  Flexible(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            child: ListTile(
-                                              title: Text('Rate', style: TextStyle(
-                                                  fontSize: 12
-                                              ),),
-                                              subtitle: Text(widget.fuelR , style: TextStyle(
-                                                  fontSize: 10
-                                              ),),
-                                            ),
-                                          )
-                                          //container
-                                        ],
-                                      )
-                                  ),
-                                  Flexible(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            child: ListTile(
-                                              title: Text('No. Of Night-Outs', style: TextStyle( fontSize: 12),),
-                                              subtitle: Text(widget.fuelN , style: TextStyle(fontSize: 10 ),),
-                                            ),
-                                          )
-                                          //container
-                                        ],
-                                      )),
-                                  Flexible(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            child: ListTile(
-                                              title: Text('Total', style: TextStyle( fontSize: 12),),
-                                              subtitle: Text(widget.fuelT , style: TextStyle(fontSize: 10 ),),
-                                            ),
-                                          )
-                                          //container
-                                        ],
-                                      ))
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              ),
 
-                            ),
-                            Divider(),
 
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0),
