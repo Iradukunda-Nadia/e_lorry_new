@@ -909,7 +909,7 @@ class _ApprovalState extends State<Approval> {
                                   ],
                                 ),
                                 new Text(
-                                  widget.amount,
+                                  widget.reqPrice,
                                   style: new TextStyle(
                                       fontSize: 11.0,
                                       color: Colors.indigo,

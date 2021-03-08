@@ -327,6 +327,7 @@ class _partRequestState extends State<partRequest> {
         'Receipent': isPhone == true? _recepient: 'N/A',
         "Till": isLalji != true?_till: 'N/A',
         'price': isCash == true? _amount : "N/A",
+        'amount': isCash == true? _amount : "N/A",
         'token': fcmToken,
 
 
@@ -855,6 +856,7 @@ class _partRequestState extends State<partRequest> {
                       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                       child: Container(
                         child: TextFormField(
+                          keyboardType: isPhone == true ? TextInputType.phone: TextInputType.text,
                           textCapitalization: TextCapitalization.sentences,
                           style: TextStyle(
                               color: Colors.black,
@@ -881,7 +883,6 @@ class _partRequestState extends State<partRequest> {
                       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                       child: Container(
                         child: TextFormField(
-                          keyboardType: TextInputType.phone,
                           textCapitalization: TextCapitalization.sentences,
                           style: TextStyle(
                               color: Colors.black,
@@ -1450,7 +1451,7 @@ class _reqDetailState extends State<reqDetail> {
                                   ],
                                 ),
                                 new Text(
-                                  widget.amount,
+                                  widget.reqPrice,
                                   style: new TextStyle(
                                       fontSize: 11.0,
                                       color: Colors.indigo,

@@ -585,7 +585,7 @@ class _fuelFormState extends State<fuelForm> {
                         padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                         child: Container(
                           child: TextFormField(
-                            keyboardType: TextInputType.phone,
+                            keyboardType: isPhone == true ? TextInputType.phone: TextInputType.text,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'SFUIDisplay'
