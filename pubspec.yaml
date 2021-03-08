@@ -51,12 +51,14 @@ dependencies:
   mpesa: ^1.0.0
   mpesa_flutter_plugin: ^0.0.4
   android_intent: ^0.3.7+7
+  overlay_support: ^1.0.5
   hover_ussd:
     git:
       url: https://github.com/Iradukunda-Nadia/hover_ussd
   month_picker_dialog:
+
 dependency_overrides:
-  intl: any
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:
