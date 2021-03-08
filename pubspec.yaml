@@ -56,6 +56,9 @@ dependencies:
       url: https://github.com/Iradukunda-Nadia/hover_ussd
   month_picker_dialog:
 
+dependency_overrides:
+  intl: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
