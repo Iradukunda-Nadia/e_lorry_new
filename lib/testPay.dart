@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:hover_ussd/hover_ussd.dart';
-import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
 import 'package:android_intent/android_intent.dart';
 
 class testPay extends StatefulWidget {
