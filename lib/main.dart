@@ -15,7 +15,6 @@ import 'package:package_info/package_info.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
 import 'package:hover_ussd/hover_ussd.dart';
-import 'package:overlay_support/overlay_support.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +29,7 @@ Future<void> main() async {
 
   var email = prefs.getString('userID');
   print(email);
-  runApp(OverlaySupport(
-    child: MaterialApp(
+  runApp( MaterialApp(
         title: 'E-lorry',
         theme: ThemeData(
           primarySwatch: Colors.green,
@@ -45,7 +43,7 @@ Future<void> main() async {
           '/MechanicScreen': (BuildContext context) => new vehicleService()
         },
         home: email == null ? LoginScreen() : Logged(userID: email,)),
-  ));
+  );
 
 }
 
