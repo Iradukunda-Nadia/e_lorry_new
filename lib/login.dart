@@ -24,7 +24,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info/package_info.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'testPay.dart';
 import 'manager/cost/perFuel.dart';
 
@@ -301,32 +300,21 @@ class _LoginScreenState extends State<LoginScreen> {
     _messaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
-        showOverlayNotification((context) {
-          return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 4),
-            child: SafeArea(
-              child: ListTile(
-                leading: SizedBox.fromSize(
-                    size: const Size(40, 40),
-                    child: ClipOval(
-                        child: Container(
-                          child: Image.asset(
-                            logoImage,
-                            fit: BoxFit.contain,
-                          ),
-                        ))),
-                title: Text(message['notification']['title']),
-                subtitle: Text(message['notification']['body']),
-                trailing: IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      OverlaySupportEntry.of(context).dismiss();
-                    }),
-              ),
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: ListTile(
+              title: Text(message['notification']['title']),
+              subtitle: Text(message['notification']['body']),
             ),
-          );
-        }, duration: Duration(milliseconds: 7000));
-
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Ok'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
         print(message['notification']['title']);
       },
       onLaunch: (Map<String, dynamic> message) async {

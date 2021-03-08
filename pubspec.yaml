@@ -51,7 +51,6 @@ dependencies:
   mpesa: ^1.0.0
   mpesa_flutter_plugin: ^0.0.4
   android_intent: ^0.3.7+7
-  overlay_support:
   hover_ussd:
     git:
       url: https://github.com/Iradukunda-Nadia/hover_ussd
