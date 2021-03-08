@@ -457,20 +457,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.3"
-  mpesa:
-    dependency: "direct main"
-    description:
-      name: mpesa
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
-  mpesa_flutter_plugin:
-    dependency: "direct main"
-    description:
-      name: mpesa_flutter_plugin
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.5"
   numberpicker:
     dependency: transitive
     description:
