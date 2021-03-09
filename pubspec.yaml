@@ -50,7 +50,7 @@ dependencies:
   photo_view: ^0.10.3
 
   android_intent: ^0.3.7+7
-  overlay_support:
+  overlay_support: 1.0.5-hotfix1
   hover_ussd:
     git:
       url: https://github.com/Iradukunda-Nadia/hover_ussd
