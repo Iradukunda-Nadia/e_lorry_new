@@ -54,10 +54,11 @@ dependencies:
   hover_ussd:
     git:
       url: https://github.com/Iradukunda-Nadia/hover_ussd
-  month_picker_dialog: ^0.2.0
+  month_picker_dialog: 0.3.1
 
 dependency_overrides:
   intl: ^0.16.1
+  rxdart: ^0.21.0
   country_pickers:
     git:
       url: git://github.com/justkawal/country_pickers.git
@@ -65,7 +66,6 @@ dependency_overrides:
   date_range_picker:
     git:
       url: https://github.com/LempereurBenjamin/date_range_picker
-
 
 dev_dependencies:
   flutter_test:
