@@ -668,3 +668,34 @@ exports.sendEmail = functions.firestore
 
 
 
+exports.sendReg = functions.firestore
+    .document('Applications/{item}')
+    .onCreate(async (snapshot) => {
+    const newValue = snapshot.data();
+    if (newValue) {
+        const _name = newValue.person;
+        const _organization = newValue.companyName;
+        const _email = newValue.email;
+        const _phone = newValue.phone;
+
+        const dayData = moment();
+        const datedData = dayData.format(' DD MMM YYYY');
+        const mailOptions = {
+            from: `softauthor1@gmail.com`,
+            to: `esthernadia70@gmail.com`,
+            cc: `elorry2020@gmail.com`,
+            subject: `New Application :: 😀 ::  ${datedData}`,
+            html: `<p>There is a New Application on Elorry </p>
+                                <h1>Details</h1>
+                                 <p> Name: ${_name} <br> Organization: ${_organization} <br> Email: ${_email} <br> Phone number: ${_phone}</p>`
+        };
+        return transporter.sendMail(mailOptions, (error, data) => {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            console.log("Sent!");
+        });
+    }
+    ;
+});
